@@ -121,7 +121,7 @@ class Main {
                         <span class="cta-arrow">▼</span>
                     </button>
                     
-                    <div class="hero-quick-signup" id="hero-quick-signup" style="opacity: 0 !important; visibility: hidden !important; transform: translateY(-10px) !important;">
+                    <div class="hero-quick-signup" id="hero-quick-signup">
                         <div class="signup-header">
                             <h3>Join the Sunlight Project</h3>
                             <p>Early access to artwork, updates, and community</p>
@@ -759,8 +759,41 @@ class Main {
         
         /* Hero CTA Container */
         .hero-cta-container { margin: 2rem 0; }
-        .hero-cta-toggle { padding: 1.2rem 3rem; background: #2d3436; color: #ffeaa7; border: none; border-radius: 50px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        .hero-cta-toggle:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #1a1a1a; }
+        .hero-cta-toggle { 
+            padding: 1.2rem 3rem; 
+            background: #2d3436; 
+            color: #ffeaa7; 
+            border: none; 
+            border-radius: 50px; 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+            position: relative;
+        }
+        .hero-cta-toggle:hover { 
+            background: #1a1a1a; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+            transform: translateY(-3px); 
+        }
+        /* Higher specificity for active state */
+        body.page-id-2 #hero-cta-toggle.active,
+        .sunlight-landing-page #hero-cta-toggle.active,
+        #hero-cta-toggle.active { 
+            background: #1a1a1a; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+        }
+        body.page-id-2 #hero-cta-toggle.active:not(:hover),
+        .sunlight-landing-page #hero-cta-toggle.active:not(:hover),
+        #hero-cta-toggle.active:not(:hover) {
+            transform: translateY(-2px);
+        }
+        .cta-arrow { 
+            display: inline-block; 
+            transition: transform 0.3s ease; 
+            transform-origin: center;
+        }
         
         /* Quick Signup Form */
         .hero-quick-signup {
@@ -772,6 +805,18 @@ class Main {
             transition: all 0.3s ease !important;
             position: relative !important;
             z-index: 1000 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(-10px) !important;
+        }
+        /* Higher specificity to override theme CSS */
+        body.page-id-2 #hero-quick-signup.visible,
+        .sunlight-landing-page #hero-quick-signup.visible,
+        #hero-quick-signup.visible {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+            display: block !important;
         }
         .signup-header { margin-bottom: 1.5rem; }
         .signup-header h3 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #2d3436; }
@@ -955,36 +1000,25 @@ class Main {
         }
         
         jQuery(document).ready(function(\$) {
-            console.log('Sunlight Project scripts loaded');
-            
             // Hero CTA Toggle
             \$('#hero-cta-toggle').on('click', function(e) {
                 e.preventDefault();
-                console.log('Toggle button clicked');
                 
                 var \$signup = \$('#hero-quick-signup');
                 var \$arrow = \$(this).find('.cta-arrow');
                 
-                console.log('Signup element found:', \$signup.length);
-                console.log('Current style attribute:', \$signup.attr('style'));
-                
-                // Check if form is currently visible (has opacity: 1 in style)
-                var isVisible = \$signup.attr('style') && \$signup.attr('style').indexOf('opacity: 1') !== -1;
+                // Check if form is currently visible (has visible class)
+                var isVisible = \$signup.hasClass('visible');
                 
                 if (!isVisible) {
-                    console.log('Showing form...');
-                    \$signup.attr('style', 'opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; display: block !important;');
+                    \$signup.addClass('visible');
                     \$(this).addClass('active');
                     \$arrow.css('transform', 'rotate(180deg)');
                 } else {
-                    console.log('Hiding form...');
-                    \$signup.attr('style', 'opacity: 0 !important; visibility: hidden !important; transform: translateY(-10px) !important;');
+                    \$signup.removeClass('visible');
                     \$(this).removeClass('active');
                     \$arrow.css('transform', 'rotate(0deg)');
                 }
-                
-                console.log('After toggle - opacity:', \$signup.css('opacity'));
-                console.log('After toggle - visibility:', \$signup.css('visibility'));
             });
             
             // Hero Quick Signup Form
