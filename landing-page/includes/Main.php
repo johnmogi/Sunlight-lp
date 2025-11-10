@@ -284,8 +284,12 @@ class Main {
             <!-- Carousel Container -->
             <div class="hero-carousel">
                 <!-- Navigation Arrows -->
-                <button class="carousel-nav carousel-prev" id="slider-prev">‹</button>
-                <button class="carousel-nav carousel-next" id="slider-next">›</button>
+                <button class="carousel-nav carousel-prev" id="slider-prev" aria-label="Previous slide">
+                    <span class="nav-icon nav-icon-prev"></span>
+                </button>
+                <button class="carousel-nav carousel-next" id="slider-next" aria-label="Next slide">
+                    <span class="nav-icon nav-icon-next"></span>
+                </button>
 
                 <!-- Carousel Slides -->
                 <div class="carousel-track">
@@ -310,6 +314,30 @@ class Main {
                                     <span class="cta-text">I Want to Participate</span>
                                     <span class="cta-arrow">▼</span>
                                 </button>
+                            </div>
+
+                            <div class="hero-quick-signup" id="form-tarot">
+                                <div class="signup-header">
+                                    <h3>Join the Sunlight Tarot Project</h3>
+                                    <p>Early access to artwork, deck updates, and community</p>
+                                </div>
+                                <form class="quick-signup-form hero-signup-form">
+                                    <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
+                                    <input type="hidden" name="project" value="sunlight-tarot">
+                                    <div class="form-row">
+                                        <input type="text" name="name" placeholder="Your Name" required>
+                                        <input type="email" name="email" placeholder="Your Email" required>
+                                        <button type="submit" class="quick-join-btn">
+                                            <span>Join ✨</span>
+                                        </button>
+                                    </div>
+                                    <div class="form-footer">
+                                        <label class="consent-label">
+                                            <input type="checkbox" name="consent" required>
+                                            <span>I agree to receive updates about Sunlight Tarot.</span>
+                                        </label>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -336,6 +364,30 @@ class Main {
                                     <span class="cta-arrow">▼</span>
                                 </button>
                             </div>
+
+                            <div class="hero-quick-signup" id="form-novels">
+                                <div class="signup-header">
+                                    <h3>Join the Maze Chronicles Journey</h3>
+                                    <p>Get notified about releases, excerpts, and special editions</p>
+                                </div>
+                                <form class="quick-signup-form hero-signup-form">
+                                    <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
+                                    <input type="hidden" name="project" value="maze-chronicles">
+                                    <div class="form-row">
+                                        <input type="text" name="name" placeholder="Your Name" required>
+                                        <input type="email" name="email" placeholder="Your Email" required>
+                                        <button type="submit" class="quick-join-btn">
+                                            <span>Join 📚</span>
+                                        </button>
+                                    </div>
+                                    <div class="form-footer">
+                                        <label class="consent-label">
+                                            <input type="checkbox" name="consent" required>
+                                            <span>I agree to receive updates about Maze Chronicles.</span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
 
@@ -361,6 +413,30 @@ class Main {
                                     <span class="cta-arrow">▼</span>
                                 </button>
                             </div>
+
+                            <div class="hero-quick-signup" id="form-game">
+                                <div class="signup-header">
+                                    <h3>Join the Maze Game Community</h3>
+                                    <p>Playtest access, development updates, and exclusive content</p>
+                                </div>
+                                <form class="quick-signup-form hero-signup-form">
+                                    <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
+                                    <input type="hidden" name="project" value="maze-game">
+                                    <div class="form-row">
+                                        <input type="text" name="name" placeholder="Your Name" required>
+                                        <input type="email" name="email" placeholder="Your Email" required>
+                                        <button type="submit" class="quick-join-btn">
+                                            <span>Join 🎮</span>
+                                        </button>
+                                    </div>
+                                    <div class="form-footer">
+                                        <label class="consent-label">
+                                            <input type="checkbox" name="consent" required>
+                                            <span>I agree to receive updates about the Maze Game.</span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,81 +446,6 @@ class Main {
                     <button class="indicator active"></button>
                     <button class="indicator"></button>
                     <button class="indicator"></button>
-                </div>
-            </div>
-
-            <!-- Persistent Forms Section - Always Visible -->
-            <div class="hero-forms-section">
-                <div class="hero-quick-signup" id="form-tarot">
-                    <div class="signup-header">
-                        <h3>Join the Sunlight Tarot Project</h3>
-                        <p>Early access to artwork, deck updates, and community</p>
-                    </div>
-                    <form class="quick-signup-form hero-signup-form">
-                        <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
-                        <input type="hidden" name="project" value="sunlight-tarot">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <button type="submit" class="quick-join-btn">
-                                <span>Join ✨</span>
-                            </button>
-                        </div>
-                        <div class="form-footer">
-                            <label class="consent-label">
-                                <input type="checkbox" name="consent" required>
-                                <span>I agree to receive updates about Sunlight Tarot.</span>
-                            </label>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="hero-quick-signup" id="form-novels">
-                    <div class="signup-header">
-                        <h3>Join the Maze Chronicles Journey</h3>
-                        <p>Get notified about releases, excerpts, and special editions</p>
-                    </div>
-                    <form class="quick-signup-form hero-signup-form">
-                        <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
-                        <input type="hidden" name="project" value="maze-chronicles">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <button type="submit" class="quick-join-btn">
-                                <span>Join 📚</span>
-                            </button>
-                        </div>
-                        <div class="form-footer">
-                            <label class="consent-label">
-                                <input type="checkbox" name="consent" required>
-                                <span>I agree to receive updates about Maze Chronicles.</span>
-                            </label>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="hero-quick-signup" id="form-game">
-                    <div class="signup-header">
-                        <h3>Join the Maze Game Community</h3>
-                        <p>Playtest access, development updates, and exclusive content</p>
-                    </div>
-                    <form class="quick-signup-form hero-signup-form">
-                        <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
-                        <input type="hidden" name="project" value="maze-game">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <button type="submit" class="quick-join-btn">
-                                <span>Join 🎮</span>
-                            </button>
-                        </div>
-                        <div class="form-footer">
-                            <label class="consent-label">
-                                <input type="checkbox" name="consent" required>
-                                <span>I agree to receive updates about the Maze Game.</span>
-                            </label>
-                        </div>
-                    </form>
                 </div>
             </div>
         </section>
@@ -1191,7 +1192,7 @@ class Main {
             max-width: 1400px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 4rem 5rem 4rem;
+            padding: 0 3rem 3rem 3rem;
             text-align: center;
         }
 
@@ -1316,10 +1317,8 @@ class Main {
             background: rgba(255,255,255,0.9);
             border: none;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 2.5rem;
-            color: #2d3436;
+            width: 58px;
+            height: 58px;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
@@ -1328,13 +1327,38 @@ class Main {
             justify-content: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
-        
+
         .carousel-nav:hover {
             background: #fff;
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
-        
+
+        .carousel-nav .nav-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .carousel-nav .nav-icon::before,
+        .carousel-nav .nav-icon::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: #2d3436;
+            border-radius: 4px;
+            top: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-icon-prev::before { left: 7px; transform: rotate(40deg); }
+        .nav-icon-prev::after { left: 7px; transform: rotate(-40deg); }
+
+        .nav-icon-next::before { right: 7px; transform: rotate(-40deg); }
+        .nav-icon-next::after { right: 7px; transform: rotate(40deg); }
+
         .carousel-prev {
             left: 2rem;
         }
@@ -1384,7 +1408,7 @@ class Main {
         
         /* Hero CTA Container - Rebuilt */
         .hero-cta-container { 
-            margin: 2rem auto; 
+            margin: 1.5rem auto 0.75rem; 
             position: relative;
             z-index: 100;
             max-width: 600px;
@@ -1432,30 +1456,33 @@ class Main {
         
         /* Quick Signup Form - Rebuilt */
         .hero-quick-signup {
-            margin-top: 1.5rem;
+            margin: 1rem auto 0;
             background: rgba(255,255,255,0.98);
-            padding: 2rem;
+            padding: 1.75rem;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.25);
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: all 0.4s ease;
+            transform: translateY(-10px);
+            transition: all 0.35s ease;
+            max-width: 560px;
         }
-        
+
         .hero-quick-signup.show {
-            max-height: 500px;
+            max-height: 520px;
             opacity: 1;
-            margin-top: 1.5rem;
+            margin-top: 0.75rem;
+            transform: translateY(0);
         }
         .signup-header { margin-bottom: 1.5rem; }
         .signup-header h3 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #2d3436; }
         .signup-header p { color: #636e72; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .quick-signup-form .form-row { display: flex; gap: 1rem; max-width: 700px; margin: 0 auto; flex-wrap: nowrap; align-items: center; direction: ltr; }
-        .quick-signup-form input { flex: 1; min-width: 150px; padding: 1rem 1.5rem; border: 2px solid #dfe6e9; background: #fff; border-radius: 50px; font-size: 1rem; transition: all 0.3s ease; }
+        .quick-signup-form .form-row { display: flex; gap: 0.75rem; max-width: 520px; margin: 0 auto; flex-wrap: nowrap; align-items: center; direction: ltr; }
+        .quick-signup-form input { flex: 1; min-width: 150px; padding: 0.9rem 1.35rem; border: 2px solid #dfe6e9; background: #fff; border-radius: 50px; font-size: 1rem; transition: all 0.3s ease; }
         .quick-signup-form input:focus { outline: none; border-color: #fdcb6e; box-shadow: 0 0 0 3px rgba(253,203,110,0.2); }
-        .quick-join-btn { padding: 1rem 2.5rem; background: #2d3436; color: #ffeaa7; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .quick-join-btn { padding: 0.95rem 2.25rem; background: #2d3436; color: #ffeaa7; border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
         .quick-join-btn:hover { background: #1a1a1a; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .form-footer { margin-top: 1rem; text-align: left; }
         .consent-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; color: #636e72; cursor: pointer; direction: ltr; text-align: left; }
@@ -1463,7 +1490,7 @@ class Main {
         .consent-label input[type=checkbox] { width: 18px; height: 18px; cursor: pointer; }
         
         /* Hero Scroll Hint */
-        .hero-scroll-hint { margin-top: 3rem; opacity: 0.7; animation: bounce 2s infinite; }
+        .hero-scroll-hint { margin-top: 2.5rem; opacity: 0.7; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
         .hero-scroll-hint span { font-size: 2rem; display: block; }
         .hero-scroll-hint p { font-size: 0.9rem; margin-top: 0.5rem; }
