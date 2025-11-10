@@ -20,7 +20,8 @@ class Main {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts'], 999);
 
         // Register all shortcodes
-        add_shortcode('sunlight_hero', [$this, 'hero_shortcode']);
+        add_shortcode('sunlight_hero', [$this, 'hero_shortcode_v2']);
+        add_shortcode('sunlight_hero_slider', [$this, 'hero_slider_shortcode']);
         add_shortcode('sunlight_about', [$this, 'about_shortcode']);
         add_shortcode('sunlight_gallery', [$this, 'gallery_shortcode']);
         add_shortcode('sunlight_video', [$this, 'video_shortcode']);
@@ -90,6 +91,367 @@ class Main {
         return is_page('sunlight-project') || is_front_page();
     }
 
+    public function hero_shortcode_v2($atts) {
+        $atts = shortcode_atts(array(
+            'bg_image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+        ), $atts);
+        
+        $bg_style = !empty($atts['bg_image']) ? 'background-image: url(' . esc_url($atts['bg_image']) . ');' : '';
+        
+        ob_start();
+        ?>
+        <section class="sunlight-hero-v2" id="hero">
+            <div class="hero-overlay"></div>
+            
+            <!-- Carousel Container -->
+            <div class="hero-carousel">
+                <!-- Navigation Arrows -->
+                <button class="carousel-nav carousel-prev" id="carousel-prev">‹</button>
+                <button class="carousel-nav carousel-next" id="carousel-next">›</button>
+                
+                <!-- Carousel Slides -->
+                <div class="carousel-track">
+                    <!-- Slide 1: Sunlight Tarot -->
+                    <div class="carousel-slide active slide-0" data-slide="0">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">✨ The Evolution of Tarot</span>
+                                <h1 class="hero-title">Sunlight Tarot</h1>
+                                <h2 class="hero-subtitle-main">A New Light on the Tarot Tradition</h2>
+                            </div>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">Not a tool for fortune-telling.<br>
+                                A living map of consciousness — science, soul, and art entwined.</p>
+                                <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-tarot">
+                                    <span class="cta-icon">✨</span>
+                                    <span class="cta-text">I Want to Participate</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                                
+                                <div class="hero-quick-signup" id="form-tarot">
+                                    <div class="signup-header">
+                                        <h3>Join the Sunlight Tarot Project</h3>
+                                        <p>Early access to artwork, deck updates, and community</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="sunlight-tarot">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join ✨</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about Sunlight Tarot.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Maze Chronicles Novels -->
+                    <div class="carousel-slide slide-1" data-slide="1">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">📚 The Literary Journey</span>
+                                <h1 class="hero-title">Maze Chronicles</h1>
+                                <h2 class="hero-subtitle-main">Four Novels, One Consciousness</h2>
+                            </div>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">Beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em>.<br>
+                                A mind-bending journey through consciousness, reality, and transformation.</p>
+                                <p class="hero-subtext">Where every choice shapes reality and every page opens new dimensions.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-novels">
+                                    <span class="cta-icon">📖</span>
+                                    <span class="cta-text">Get Early Access</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                                
+                                <div class="hero-quick-signup" id="form-novels">
+                                    <div class="signup-header">
+                                        <h3>Join the Maze Chronicles Journey</h3>
+                                        <p>Get notified about releases, excerpts, and special editions</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="maze-chronicles">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join 📚</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about Maze Chronicles.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Maze Game -->
+                    <div class="carousel-slide slide-2" data-slide="2">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">🎮 The Interactive Experience</span>
+                                <h1 class="hero-title">The Maze Game</h1>
+                                <h2 class="hero-subtitle-main">Play Your Way to Awakening</h2>
+                            </div>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">A tabletop and digital experience where consciousness is the game.<br>
+                                Every choice matters. Every path leads to transformation.</p>
+                                <p class="hero-subtext">Strategy meets mysticism in an unforgettable journey through the self.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-game">
+                                    <span class="cta-icon">🎲</span>
+                                    <span class="cta-text">Join the Playtest</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                                
+                                <div class="hero-quick-signup" id="form-game">
+                                    <div class="signup-header">
+                                        <h3>Join the Maze Game Community</h3>
+                                        <p>Playtest access, development updates, and exclusive content</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="maze-game">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join 🎮</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about the Maze Game.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <button class="indicator active"></button>
+                    <button class="indicator"></button>
+                    <button class="indicator"></button>
+                </div>
+            </div>
+        </section>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    public function hero_slider_shortcode($atts) {
+        $atts = shortcode_atts(array(), $atts);
+
+        ob_start();
+        ?>
+        <div class="sunlight-full-width">
+        <section class="sunlight-hero-slider" id="hero-slider">
+            <div class="hero-overlay"></div>
+
+            <!-- Carousel Container -->
+            <div class="hero-carousel">
+                <!-- Navigation Arrows -->
+                <button class="carousel-nav carousel-prev" id="slider-prev">‹</button>
+                <button class="carousel-nav carousel-next" id="slider-next">›</button>
+
+                <!-- Carousel Slides -->
+                <div class="carousel-track">
+                    <!-- Slide 1: Sunlight Tarot -->
+                    <div class="carousel-slide active slide-0" data-slide="0">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">✨ The Evolution of Tarot</span>
+                                <h1 class="hero-title">Sunlight Tarot</h1>
+                                <h2 class="hero-subtitle-main">A New Light on the Tarot Tradition</h2>
+                            </div>
+
+                            <div class="hero-description-block">
+                                <p class="hero-description">Not a tool for fortune-telling.<br>
+                                A living map of consciousness — science, soul, and art entwined.</p>
+                                <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding.</p>
+                            </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-tarot">
+                                    <span class="cta-icon">✨</span>
+                                    <span class="cta-text">I Want to Participate</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Maze Chronicles Novels -->
+                    <div class="carousel-slide slide-1" data-slide="1">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">📚 The Literary Journey</span>
+                                <h1 class="hero-title">Maze Chronicles</h1>
+                                <h2 class="hero-subtitle-main">Four Novels, One Consciousness</h2>
+                            </div>
+
+                            <div class="hero-description-block">
+                                <p class="hero-description">Beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em>.<br>
+                                A mind-bending journey through consciousness, reality, and transformation.</p>
+                                <p class="hero-subtext">Where every choice shapes reality and every page opens new dimensions.</p>
+                            </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-novels">
+                                    <span class="cta-icon">📖</span>
+                                    <span class="cta-text">Get Early Access</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Maze Game -->
+                    <div class="carousel-slide slide-2" data-slide="2">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">🎮 The Interactive Experience</span>
+                                <h1 class="hero-title">The Maze Game</h1>
+                                <h2 class="hero-subtitle-main">Play Your Way to Awakening</h2>
+                            </div>
+
+                            <div class="hero-description-block">
+                                <p class="hero-description">A tabletop and digital experience where consciousness is the game.<br>
+                                Every choice matters. Every path leads to transformation.</p>
+                                <p class="hero-subtext">Strategy meets mysticism in an unforgettable journey through the self.</p>
+                            </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-game">
+                                    <span class="cta-icon">🎲</span>
+                                    <span class="cta-text">Join the Playtest</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <button class="indicator active"></button>
+                    <button class="indicator"></button>
+                    <button class="indicator"></button>
+                </div>
+            </div>
+
+            <!-- Persistent Forms Section - Always Visible -->
+            <div class="hero-forms-section">
+                <div class="hero-quick-signup" id="form-tarot">
+                    <div class="signup-header">
+                        <h3>Join the Sunlight Tarot Project</h3>
+                        <p>Early access to artwork, deck updates, and community</p>
+                    </div>
+                    <form class="quick-signup-form hero-signup-form">
+                        <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
+                        <input type="hidden" name="project" value="sunlight-tarot">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <button type="submit" class="quick-join-btn">
+                                <span>Join ✨</span>
+                            </button>
+                        </div>
+                        <div class="form-footer">
+                            <label class="consent-label">
+                                <input type="checkbox" name="consent" required>
+                                <span>I agree to receive updates about Sunlight Tarot.</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="hero-quick-signup" id="form-novels">
+                    <div class="signup-header">
+                        <h3>Join the Maze Chronicles Journey</h3>
+                        <p>Get notified about releases, excerpts, and special editions</p>
+                    </div>
+                    <form class="quick-signup-form hero-signup-form">
+                        <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
+                        <input type="hidden" name="project" value="maze-chronicles">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <button type="submit" class="quick-join-btn">
+                                <span>Join 📚</span>
+                            </button>
+                        </div>
+                        <div class="form-footer">
+                            <label class="consent-label">
+                                <input type="checkbox" name="consent" required>
+                                <span>I agree to receive updates about Maze Chronicles.</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="hero-quick-signup" id="form-game">
+                    <div class="signup-header">
+                        <h3>Join the Maze Game Community</h3>
+                        <p>Playtest access, development updates, and exclusive content</p>
+                    </div>
+                    <form class="quick-signup-form hero-signup-form">
+                        <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
+                        <input type="hidden" name="project" value="maze-game">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <button type="submit" class="quick-join-btn">
+                                <span>Join 🎮</span>
+                            </button>
+                        </div>
+                        <div class="form-footer">
+                            <label class="consent-label">
+                                <input type="checkbox" name="consent" required>
+                                <span>I agree to receive updates about the Maze Game.</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <?php
+        return ob_get_clean();
+    }
+
     public function hero_shortcode($atts) {
         $atts = shortcode_atts(array(
             'bg_image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
@@ -99,55 +461,167 @@ class Main {
         
         ob_start();
         ?>
-        <section class="sunlight-hero" id="hero" style="<?php echo $bg_style; ?>">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-brand">
-                    <span class="hero-pre-title">✨ The Evolution of Tarot</span>
-                    <h1 class="hero-title">Sunlight Tarot</h1>
-                    <h2 class="hero-subtitle-main">A New Light on the Tarot Tradition</h2>
-                </div>
+        <section class="sunlight-hero" id="hero">
+            <div class="hero-carousel">
+                <!-- Navigation Arrows -->
+                <button class="carousel-nav carousel-prev" id="carousel-prev">‹</button>
+                <button class="carousel-nav carousel-next" id="carousel-next">›</button>
                 
-                <div class="hero-description-block">
-                    <p class="hero-description">Not a tool for fortune-telling.<br>
-                    A living map of consciousness — science, soul, and art entwined.</p>
-                    <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding. Join us at the beginning of something luminous.</p>
-                </div>
-                
-                <div class="hero-cta-container">
-                    <button class="hero-cta-toggle" id="hero-cta-toggle">
-                        <span class="cta-icon">✨</span>
-                        <span class="cta-text">I Want to Participate</span>
-                        <span class="cta-arrow">▼</span>
-                    </button>
-                    
-                    <div class="hero-quick-signup" id="hero-quick-signup">
-                        <div class="signup-header">
-                            <h3>Join the Sunlight Project</h3>
-                            <p>Early access to artwork, updates, and community</p>
-                        </div>
-                        <form class="quick-signup-form" id="hero-signup-form">
-                            <?php wp_nonce_field('sunlight_signup_nonce', 'hero_signup_nonce'); ?>
-                            <div class="form-row">
-                                <input type="text" name="name" placeholder="Your Name" required>
-                                <input type="email" name="email" placeholder="Your Email" required>
-                                <button type="submit" class="quick-join-btn">
-                                    <span>Join ✨</span>
+                <!-- Carousel Slides -->
+                <div class="carousel-track">
+                    <!-- Slide 1: Sunlight Tarot -->
+                    <div class="carousel-slide active slide-0" data-slide="0">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">✨ The Evolution of Tarot</span>
+                                <h1 class="hero-title">Sunlight Tarot</h1>
+                                <h2 class="hero-subtitle-main">A New Light on the Tarot Tradition</h2>
+                            </div>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">Not a tool for fortune-telling.<br>
+                                A living map of consciousness — science, soul, and art entwined.</p>
+                                <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-tarot">
+                                    <span class="cta-icon">✨</span>
+                                    <span class="cta-text">I Want to Participate</span>
+                                    <span class="cta-arrow">▼</span>
                                 </button>
+                                
+                                <div class="hero-quick-signup" id="form-tarot">
+                                    <div class="signup-header">
+                                        <h3>Join the Sunlight Tarot Project</h3>
+                                        <p>Early access to artwork, deck updates, and community</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="sunlight-tarot">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join ✨</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about Sunlight Tarot.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="form-footer">
-                                <label class="consent-label">
-                                    <input type="checkbox" name="consent" required>
-                                    <span>I agree to receive occasional updates about the project.</span>
-                                </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Maze Chronicles Novels -->
+                    <div class="carousel-slide slide-1" data-slide="1">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">📚 The Literary Journey</span>
+                                <h1 class="hero-title">Maze Chronicles</h1>
+                                <h2 class="hero-subtitle-main">Four Novels, One Consciousness</h2>
                             </div>
-                        </form>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">Beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em>.<br>
+                                A mind-bending journey through consciousness, reality, and transformation.</p>
+                                <p class="hero-subtext">Where every choice shapes reality and every page opens new dimensions.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-novels">
+                                    <span class="cta-icon">📖</span>
+                                    <span class="cta-text">Get Early Access</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                                
+                                <div class="hero-quick-signup" id="form-novels">
+                                    <div class="signup-header">
+                                        <h3>Join the Maze Chronicles Journey</h3>
+                                        <p>Get notified about releases, excerpts, and special editions</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="maze-chronicles">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join 📚</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about Maze Chronicles.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Maze Game -->
+                    <div class="carousel-slide slide-2" data-slide="2">
+                        <div class="hero-content">
+                            <div class="hero-brand">
+                                <span class="hero-pre-title">🎮 The Interactive Experience</span>
+                                <h1 class="hero-title">The Maze Game</h1>
+                                <h2 class="hero-subtitle-main">Play Your Way to Awakening</h2>
+                            </div>
+                            
+                            <div class="hero-description-block">
+                                <p class="hero-description">A tabletop and digital experience where consciousness is the game.<br>
+                                Every choice matters. Every path leads to transformation.</p>
+                                <p class="hero-subtext">Strategy meets mysticism in an unforgettable journey through the self.</p>
+                            </div>
+                            
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-game">
+                                    <span class="cta-icon">🎲</span>
+                                    <span class="cta-text">Join the Playtest</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                                
+                                <div class="hero-quick-signup" id="form-game">
+                                    <div class="signup-header">
+                                        <h3>Join the Maze Game Community</h3>
+                                        <p>Playtest access, development updates, and exclusive content</p>
+                                    </div>
+                                    <form class="quick-signup-form hero-signup-form">
+                                        <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
+                                        <input type="hidden" name="project" value="maze-game">
+                                        <div class="form-row">
+                                            <input type="text" name="name" placeholder="Your Name" required>
+                                            <input type="email" name="email" placeholder="Your Email" required>
+                                            <button type="submit" class="quick-join-btn">
+                                                <span>Join 🎮</span>
+                                            </button>
+                                        </div>
+                                        <div class="form-footer">
+                                            <label class="consent-label">
+                                                <input type="checkbox" name="consent" required>
+                                                <span>I agree to receive updates about the Maze Game.</span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="hero-scroll-hint">
-                    <span>↓</span>
-                    <p>Discover the Vision</p>
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <button class="indicator active"></button>
+                    <button class="indicator"></button>
+                    <button class="indicator"></button>
                 </div>
             </div>
             
@@ -168,40 +642,40 @@ class Main {
         <section class="sunlight-about" id="about">
             <div class="container">
                 <div class="about-intro">
-                    <span class="section-label">The Beginning</span>
-                    <h2 class="section-title">What Is the Sunlight Project?</h2>
-                    <p class="section-lead">A creative evolution of the Tarot — reimagined for the modern seeker.</p>
+                    <span class="section-label">Three Journeys, One Vision</span>
+                    <h2 class="section-title">The Sunlight Universe</h2>
+                    <p class="section-lead">Where consciousness meets creativity through three interconnected experiences.</p>
                 </div>
                 
                 <div class="about-grid">
                     <div class="about-card">
-                        <div class="card-icon">🌅</div>
-                        <h3>A Bridge Between Worlds</h3>
-                        <p>The Sunlight Project reimagines the Tarot as a bridge between mysticism and modern understanding. But it's more than cards — it's a complete universe of storytelling, play, and transformation.</p>
+                        <div class="card-icon">✨</div>
+                        <h3>Sunlight Tarot</h3>
+                        <p>A revolutionary reimagining of the Tarot — not for fortune-telling, but as a living map of consciousness. Each card is a bridge between mysticism and modern understanding, combining science, soul, and art into a transformative experience for the modern seeker.</p>
                     </div>
                     
                     <div class="about-card">
                         <div class="card-icon">📚</div>
-                        <h3>Four Novels, One Journey</h3>
-                        <p>At the heart of the project are four interconnected novels, beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em> by Adam Douglas. Each book explores consciousness, transformation, and the magic hidden in everyday reality.</p>
+                        <h3>Maze Chronicles</h3>
+                        <p>Four interconnected novels beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em> by Adam Douglas. A mind-bending literary journey through consciousness, reality, and transformation where every choice shapes your understanding of existence.</p>
                     </div>
                     
                     <div class="about-card">
                         <div class="card-icon">🎮</div>
-                        <h3>Play, Explore, Transform</h3>
-                        <p>The Sunlight universe includes both a digital game and a tabletop experience. Each game mechanic reflects the tarot's philosophy: choices matter, consciousness expands, and every path leads to awakening.</p>
+                        <h3>The Maze Game</h3>
+                        <p>Both a tabletop and digital experience where consciousness is the game itself. Every mechanic reflects the Tarot's philosophy: choices matter, consciousness expands, and every path leads to awakening. Strategy meets mysticism in an unforgettable journey.</p>
                     </div>
                     
                     <div class="about-card">
                         <div class="card-icon">💫</div>
-                        <h3>Continuing a Legacy</h3>
-                        <p>Inspired by the revolutionary spirit of Osho and Eileen Connolly, we continue their legacy: breaking conventions, opening hearts, and bringing light to shadow. This is Tarot as meditation, art, and awakening.</p>
+                        <h3>One Connected Universe</h3>
+                        <p>The cards, novels, and game are not separate — they're facets of the same light. Inspired by the revolutionary spirit of Osho and Eileen Connolly, we continue their legacy: breaking conventions, opening hearts, and bringing light to shadow.</p>
                     </div>
                 </div>
                 
                 <div class="about-quote">
                     <blockquote>
-                        "The Tarot is not about knowing the future. It's about understanding the now."
+                        "The Tarot is not about knowing the future. It's about understanding the now — through cards, stories, and play."
                     </blockquote>
                 </div>
             </div>
@@ -670,16 +1144,19 @@ class Main {
     private function get_inline_styles() {
         return "
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        .sunlight-full-width {
+            width: 100vw !important;
+            margin-left: calc(50% - 50vw) !important;
+            margin-right: calc(50% - 50vw) !important;
+            padding: 0 !important;
+            max-width: none !important;
+        }
         body.sunlight-landing-page { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #2d3436; overflow-x: hidden; }
         
-        /* AGGRESSIVE FULL WIDTH OVERRIDE */
-        html, body, body.sunlight-landing-page, body.page-id-2 {
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow-x: hidden !important;
+            padding: 2rem !important;
+            box-sizing: border-box !important;
         }
-
+        
         /* Force all sections to be full width */
         .sunlight-hero, .sunlight-about, .sunlight-gallery, .sunlight-video, .sunlight-signup, .sunlight-vision, .sunlight-footer {
             width: 100vw !important;
@@ -714,7 +1191,7 @@ class Main {
             max-width: 1400px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 4rem;
+            padding: 0 4rem 5rem 4rem;
             text-align: center;
         }
 
@@ -731,13 +1208,13 @@ class Main {
             direction: ltr !important;
         }
 
-        /* Hero Section - Enhanced Full Width */
-        .sunlight-hero {
+        .sunlight-hero-slider {
             position: relative;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e17055 100%);
             background-size: cover;
             background-position: center;
@@ -746,10 +1223,158 @@ class Main {
             width: 100vw !important;
             margin-left: calc(50% - 50vw) !important;
             margin-right: calc(50% - 50vw) !important;
-            padding: 2rem !important;
+            padding: 3rem 0 4rem !important;
             box-sizing: border-box !important;
+            overflow: hidden;
         }
-        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 1; }
+        .sunlight-hero-slider .carousel-slide {
+            display: none;
+            position: relative;
+            min-height: 50vh;
+            padding: 4rem 2rem;
+            width: 100vw;
+            max-width: none;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+        .sunlight-hero-slider .carousel-slide.active {
+            display: block;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: calc(50% - 50vw);
+            width: 100vw;
+            height: 60vh;
+            background: rgba(0,0,0,0.35);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Carousel Container */
+        .hero-carousel {
+            position: relative;
+            width: 100vw;
+            max-width: none;
+            padding: 0 2rem;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            height: 60vh; /* Fixed height instead of 100% */
+            z-index: 2;
+            margin-bottom: 3rem; /* Add spacing before forms */
+        }
+        
+        /* Carousel Track */
+        .carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Carousel Slides */
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+        
+        /* Slide-specific backgrounds */
+        .carousel-slide.slide-0 {
+            background: linear-gradient(135deg, rgba(255,234,167,0.9) 0%, rgba(253,203,110,0.9) 50%, rgba(225,112,85,0.9) 100%),
+                        url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?w=1920&q=80');
+        }
+        .carousel-slide.slide-1 {
+            background: linear-gradient(135deg, rgba(116,185,255,0.85) 0%, rgba(162,155,254,0.85) 50%, rgba(223,230,233,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80');
+        }
+        .carousel-slide.slide-2 {
+            background: linear-gradient(135deg, rgba(253,121,168,0.85) 0%, rgba(99,110,114,0.85) 50%, rgba(45,52,54,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80');
+        }
+        
+        /* Carousel Navigation Arrows */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 2.5rem;
+            color: #2d3436;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .carousel-nav:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        
+        .carousel-prev {
+            left: 2rem;
+        }
+        
+        .carousel-next {
+            right: 2rem;
+        }
+        
+        /* Carousel Indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+        
+        .carousel-indicators .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        
+        .carousel-indicators .indicator:hover {
+            background: rgba(255,255,255,0.8);
+            transform: scale(1.2);
+        }
+        
+        .carousel-indicators .indicator.active {
+            background: #fff;
+            width: 40px;
+            border-radius: 10px;
+        }
         .hero-pre-title { display: inline-block; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; background: rgba(255,255,255,0.95); color: #2d3436; padding: 0.5rem 1.5rem; border-radius: 25px; }
         .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.5rem; font-weight: 800; text-shadow: 3px 3px 8px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3); color: #fff; }
         .hero-subtitle-main { font-size: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 1.5rem; font-weight: 300; font-style: italic; text-shadow: 2px 2px 6px rgba(0,0,0,0.5); color: #fff; }
@@ -757,8 +1382,14 @@ class Main {
         .hero-description { font-size: clamp(1.1rem, 2.5vw, 1.5rem); margin-bottom: 1rem; line-height: 1.6; font-weight: 500; color: #2d3436; }
         .hero-subtext { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: 0; color: #636e72; max-width: 700px; margin-left: auto; margin-right: auto; }
         
-        /* Hero CTA Container */
-        .hero-cta-container { margin: 2rem 0; }
+        /* Hero CTA Container - Rebuilt */
+        .hero-cta-container { 
+            margin: 2rem auto; 
+            position: relative;
+            z-index: 100;
+            max-width: 600px;
+        }
+        
         .hero-cta-toggle { 
             padding: 1.2rem 3rem; 
             background: #2d3436; 
@@ -768,55 +1399,54 @@ class Main {
             font-size: 1.3rem; 
             font-weight: 700; 
             cursor: pointer; 
-            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; 
+            transition: all 0.3s ease; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
-            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        
         .hero-cta-toggle:hover { 
             background: #1a1a1a; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
             transform: translateY(-3px); 
         }
-        /* Higher specificity for active state */
-        body.page-id-2 #hero-cta-toggle.active,
-        .sunlight-landing-page #hero-cta-toggle.active,
-        #hero-cta-toggle.active { 
+        
+        .hero-cta-toggle.active { 
             background: #1a1a1a; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
         }
-        body.page-id-2 #hero-cta-toggle.active:not(:hover),
-        .sunlight-landing-page #hero-cta-toggle.active:not(:hover),
-        #hero-cta-toggle.active:not(:hover) {
-            transform: translateY(-2px);
+        
+        .cta-icon { 
+            font-size: 1.2em; 
         }
+        
         .cta-arrow { 
             display: inline-block; 
             transition: transform 0.3s ease; 
-            transform-origin: center;
+            margin-left: 0.5rem;
         }
         
-        /* Quick Signup Form */
+        .hero-cta-toggle.active .cta-arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Quick Signup Form - Rebuilt */
         .hero-quick-signup {
             margin-top: 1.5rem;
-            background: rgba(255,255,255,0.95) !important;
-            padding: 2rem !important;
-            border-radius: 15px !important;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2) !important;
-            transition: all 0.3s ease !important;
-            position: relative !important;
-            z-index: 1000 !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transform: translateY(-10px) !important;
+            background: rgba(255,255,255,0.98);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
         }
-        /* Higher specificity to override theme CSS */
-        body.page-id-2 #hero-quick-signup.visible,
-        .sunlight-landing-page #hero-quick-signup.visible,
-        #hero-quick-signup.visible {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateY(0) !important;
-            display: block !important;
+        
+        .hero-quick-signup.show {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1.5rem;
         }
         .signup-header { margin-bottom: 1.5rem; }
         .signup-header h3 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #2d3436; }
@@ -915,7 +1545,7 @@ class Main {
         /* Responsive Mobile Styles */
         @media (max-width: 768px) {
             .sunlight-hero { padding: 1rem; }
-            .hero-content { padding: 0 1rem; }
+            .hero-content { padding: 0 1rem 4rem 1rem; }
             .hero-description-block { padding: 1rem 1.5rem; }
             .hero-cta-toggle { font-size: 1.1rem; padding: 1rem 2rem; }
             .hero-quick-signup { padding: 1.5rem; }
@@ -924,14 +1554,58 @@ class Main {
             .quick-signup-form input { min-width: 100%; }
             .quick-join-btn { width: 100%; }
             .container { padding: 3rem 1.5rem; }
+            
+            /* Carousel mobile adjustments */
+            .carousel-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+            .carousel-prev {
+                left: 0.5rem;
+            }
+            .carousel-next {
+                right: 0.5rem;
+            }
+            .carousel-indicators {
+                bottom: 0.75rem;
+            }
+            .carousel-indicators .indicator {
+                width: 8px;
+                height: 8px;
+                border-width: 1px;
+            }
+            .carousel-indicators .indicator.active {
+                width: 24px;
+            }
+
+            /* Hero slider mobile adjustments */
+            .hero-carousel {
+                height: 50vh !important; /* Shorter on mobile */
+                margin-bottom: 2rem !important;
+            }
+            .sunlight-hero-slider .carousel-slide {
+                min-height: 40vh !important; /* Shorter slides on mobile */
+                padding: 2rem 1rem !important;
+            }
+            .sunlight-hero-slider .hero-forms-section {
+                margin-top: 2rem !important;
+                padding: 1rem !important;
+            }
         }
         
-        /* Full Width Override for WordPress Containers */
-        .sunlight-landing-page .entry-content,
-        .sunlight-landing-page .site-content,
-        .sunlight-landing-page .ast-container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
-        
-        /* Hide WordPress Header and Page Title on Sample Page */
+        /* Hero Slider Forms Section */
+        .sunlight-hero-slider .hero-forms-section {
+            margin-top: 4rem;
+            padding: 2rem 2rem 0;
+            width: 100vw;
+            max-width: none;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 3;
+        }
         body.page-id-2 #masthead,
         body.page-id-2 .site-header,
         body.page-id-2 .entry-header,
@@ -947,23 +1621,7 @@ class Main {
         body.page-id-2 .entry-content { 
             padding: 0 !important; 
             margin: 0 !important; 
-            max-width: none !important;
-            width: 100vw !important;
         }
-        
-        /* Override Astra container constraints */
-        body.page-id-2 .ast-container,
-        .sunlight-landing-page .entry-content,
-        .sunlight-landing-page .site-content,
-        .sunlight-landing-page .ast-container {
-            max-width: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: 100vw !important;
-        }
-        
-        /* Ensure all sections span full width and are centered */
-        body.page-id-2 .sunlight-hero,
         body.page-id-2 .sunlight-about,
         body.page-id-2 .sunlight-gallery,
         body.page-id-2 .sunlight-video,
@@ -996,41 +1654,138 @@ class Main {
             });
             
             event.currentTarget.classList.add('active');
-            document.getElementById('gallery-' + tabName).classList.add('active');
+            document.getElementById('gallery-' + tabName).style.display = 'block';
+            document.getElementById('gallery-' + tabName).style.opacity = '1';
         }
         
         jQuery(document).ready(function(\$) {
-            // Hero CTA Toggle
-            \$('#hero-cta-toggle').on('click', function(e) {
-                e.preventDefault();
+            // Initialize - forms start hidden via CSS
+            
+            // Carousel Variables
+            var currentSlide = 0;
+            var totalSlides = 3;
+            
+            // Carousel Navigation Function (for old hero)
+            function goToSlide(slideIndex) {
+                // Hide all forms when switching slides
+                \$('.hero-quick-signup').removeClass('show');
+                \$('.hero-cta-toggle').removeClass('active');
                 
-                var \$signup = \$('#hero-quick-signup');
-                var \$arrow = \$(this).find('.cta-arrow');
+                // Remove active class from all slides and indicators
+                \$('.carousel-slide').removeClass('active');
+                \$('.carousel-indicators .indicator').removeClass('active');
                 
-                // Check if form is currently visible (has visible class)
-                var isVisible = \$signup.hasClass('visible');
+                // Add active class to current slide and indicator
+                \$('.carousel-slide.slide-' + slideIndex).addClass('active');
+                \$('.carousel-indicators .indicator').eq(slideIndex).addClass('active');
                 
-                if (!isVisible) {
-                    \$signup.addClass('visible');
-                    \$(this).addClass('active');
-                    \$arrow.css('transform', 'rotate(180deg)');
-                } else {
-                    \$signup.removeClass('visible');
-                    \$(this).removeClass('active');
-                    \$arrow.css('transform', 'rotate(0deg)');
-                }
+                currentSlide = slideIndex;
+            }
+            
+            // Slider Navigation Function (for new hero_slider - forms stay active per slide)
+            function goToSliderSlide(slideIndex) {
+                // Hide all forms when switching slides
+                \$('.sunlight-hero-slider .hero-quick-signup').removeClass('show');
+                \$('.sunlight-hero-slider .hero-cta-toggle').removeClass('active');
+                
+                // Remove active class from all slides and indicators
+                \$('.sunlight-hero-slider .carousel-slide').removeClass('active');
+                \$('.sunlight-hero-slider .carousel-indicators .indicator').removeClass('active');
+                
+                // Add active class to current slide and indicator
+                \$('.sunlight-hero-slider .carousel-slide.slide-' + slideIndex).addClass('active');
+                \$('.sunlight-hero-slider .carousel-indicators .indicator').eq(slideIndex).addClass('active');
+                
+                currentSlide = slideIndex;
+            }
+            
+            // Next Slide (old hero)
+            \$('#carousel-next').on('click', function() {
+                var nextSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(nextSlide);
             });
             
-            // Hero Quick Signup Form
-            \$('#hero-signup-form').on('submit', function(e) {
+            // Previous Slide (old hero)
+            \$('#carousel-prev').on('click', function() {
+                var prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(prevSlide);
+            });
+            
+            // Next Slide (new hero slider)
+            \$('#slider-next').on('click', function() {
+                var nextSlide = (currentSlide + 1) % totalSlides;
+                goToSliderSlide(nextSlide);
+            });
+            
+            // Previous Slide (new hero slider)
+            \$('#slider-prev').on('click', function() {
+                var prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSliderSlide(prevSlide);
+            });
+            
+            // Indicator Navigation (old hero)
+            \$('.carousel-indicators .indicator').on('click', function() {
+                var slideIndex = \$(this).index();
+                goToSlide(slideIndex);
+            });
+            
+            // Indicator Navigation (new hero slider)
+            \$('.sunlight-hero-slider .carousel-indicators .indicator').on('click', function() {
+                var slideIndex = \$(this).index();
+                goToSliderSlide(slideIndex);
+            });
+            
+            // Auto-play Carousel (slowed down to 15 seconds)
+            var autoPlayInterval = setInterval(function() {
+                var nextSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(nextSlide);
+            }, 15000);
+            
+            // Auto-play Slider (for new hero slider)
+            var sliderAutoPlayInterval = setInterval(function() {
+                var nextSlide = (currentSlide + 1) % totalSlides;
+                goToSliderSlide(nextSlide);
+            }, 15000);
+            
+            // Pause auto-play on user interaction
+            \$('.carousel-nav, .carousel-indicators .indicator').on('click', function() {
+                clearInterval(autoPlayInterval);
+                clearInterval(sliderAutoPlayInterval);
+            });
+            
+            // Hero CTA Toggle - Rebuilt with simple class-based approach
+            \$('.hero-cta-toggle').on('click', function(e) {
                 e.preventDefault();
+                
+                var \$button = \$(this);
+                var formId = \$button.data('form');
+                var \$form = \$('#' + formId);
+                
+                // Close all other forms
+                \$('.hero-quick-signup').not(\$form).removeClass('show');
+                \$('.hero-cta-toggle').not(\$button).removeClass('active');
+                
+                // Toggle this form
+                \$form.toggleClass('show');
+                \$button.toggleClass('active');
+            });
+            
+            // Hero Signup Forms - Handle all forms dynamically
+            \$('.hero-signup-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                var \$thisForm = \$(this);
+                var project = \$thisForm.find('input[name=project]').val();
+                var nonceName = project === 'sunlight-tarot' ? 'tarot_signup_nonce' : 
+                                (project === 'maze-chronicles' ? 'novels_signup_nonce' : 'game_signup_nonce');
                 
                 var formData = {
                     action: 'sunlight_signup',
-                    nonce: \$('#hero_signup_nonce').val(),
-                    name: \$(this).find('input[name=name]').val(),
-                    email: \$(this).find('input[name=email]').val(),
-                    consent: true
+                    nonce: \$thisForm.find('#' + nonceName).val(),
+                    name: \$thisForm.find('input[name=name]').val(),
+                    email: \$thisForm.find('input[name=email]').val(),
+                    project: project,
+                    consent: \$thisForm.find('input[name=consent]').is(':checked')
                 };
                 
                 \$.ajax({
@@ -1039,7 +1794,12 @@ class Main {
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            \$('#hero-quick-signup').html('<div class=\"signup-success-message\" style=\"background:white;padding:2rem;border-radius:10px;text-align:center;border:2px solid #fdcb6e;\"><h3>✨ Welcome to the Journey!</h3><p>' + response.data.message + '</p><p style=\"margin-top:1rem;font-size:0.9rem;\">Check your email for next steps.</p></div>');
+                            var projectName = project === 'sunlight-tarot' ? 'Sunlight Tarot' : 
+                                            (project === 'maze-chronicles' ? 'Maze Chronicles' : 'The Maze Game');
+                            var emoji = project === 'sunlight-tarot' ? '✨' : 
+                                       (project === 'maze-chronicles' ? '📚' : '🎮');
+                            
+                            \$thisForm.closest('.hero-quick-signup').html('<div class=\"signup-success-message\" style=\"background:white;padding:2rem;border-radius:10px;text-align:center;border:2px solid #fdcb6e;\"><h3>' + emoji + ' Welcome to ' + projectName + '!</h3><p>' + response.data.message + '</p><p style=\"margin-top:1rem;font-size:0.9rem;\">Check your email for next steps.</p></div>');
                         } else {
                             alert('Error: ' + response.data.message);
                         }
