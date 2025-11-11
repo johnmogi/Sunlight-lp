@@ -1,0 +1,156 @@
+.cta-slider {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    position: relative;
+}
+
+.cta-slides {
+    position: relative;
+    min-height: 300px;
+}
+
+.cta-slide {
+    display: none;
+    text-align: center;
+}
+
+.cta-slide.active {
+    display: block;
+}
+
+.cta-slide h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-slide p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+/* Form */
+.cta-form {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.cta-form.show {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.cta-submit-form {
+    max-width: 600px;
+    margin: 0 auto 1rem;
+}
+
+.cta-submit-form .form-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.cta-submit-form input[name="name"],
+.cta-submit-form input[name="email"] {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.cta-submit-form button {
+    padding: 0.75rem 1.5rem;
+    background: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cta-submit-form button:hover {
+    background: #005a87;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 600px) {
+    .cta-submit-form .form-row {
+        flex-direction: column;
+    }
+    
+    .cta-submit-form button {
+        width: 100%;
+    }
+}
+
+/* CTA Button */
+.cta-toggle {
+    padding: 1rem 2rem;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cta-toggle:hover {
+    background: #555;
+}
+
+.cta-toggle.active {
+    background: #0073aa;
+}
+
+/* Navigation */
+.cta-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.cta-prev,
+.cta-next {
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.cta-prev:hover,
+.cta-next:hover {
+    background: #ddd;
+}
+
+/* Message */
+.cta-message {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+
+.cta-message.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.cta-message.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

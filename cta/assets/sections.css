@@ -1,0 +1,436 @@
+.cta-container {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 0 1.5rem;
+}
+
+/* About — Connected Universe */
+.cta-about__universe {
+    margin: 3rem auto;
+    max-width: 740px;
+    text-align: center;
+}
+
+.cta-about__universe-label {
+    font-size: 1.6rem;
+    color: #2d3436;
+    margin-bottom: 0.75rem;
+}
+
+.cta-about__universe-description {
+    font-size: 1.1rem;
+    color: #636e72;
+    line-height: 1.7;
+}
+
+/* Gallery */
+.cta-gallery {
+    padding: 4rem 0;
+    background: #ffffff;
+    direction: ltr;
+}
+
+.cta-gallery__intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.cta-gallery__tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.cta-gallery__tabs button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: #f1f2f6;
+    color: #2d3436;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.cta-gallery__tabs button span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.cta-gallery__tabs button .cta-gallery__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    background: rgba(225, 112, 85, 0.15);
+    color: #d35400;
+}
+
+.cta-gallery__tabs button.is-active {
+    background: #2d3436;
+    color: #ffffff;
+    border-color: #2d3436;
+}
+
+.cta-gallery__tabs button.is-active .cta-gallery__count {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.cta-gallery__pane {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.cta-gallery__pane.is-active {
+    display: block;
+}
+
+.cta-gallery__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cta-gallery__header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.cta-gallery__header p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #636e72;
+}
+
+.cta-gallery__grid {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.cta-gallery__item {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(45, 52, 54, 0.08);
+    border: 1px solid rgba(99, 110, 114, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-gallery__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    background: repeating-linear-gradient(135deg, #f1f2f6, #f1f2f6 10px, #ffffff 10px, #ffffff 20px);
+    color: #b2bec3;
+    font-size: 2rem;
+}
+
+.cta-gallery__item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(45, 52, 54, 0.14);
+}
+
+.cta-gallery__image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.cta-gallery__trigger {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.cta-gallery__body {
+    padding: 1.5rem;
+}
+
+.cta-gallery__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #b2bec3;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.cta-gallery__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: #2d3436;
+}
+
+.cta-gallery__headline {
+    font-size: 1.05rem;
+    color: #2d3436;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.cta-gallery__subtitle {
+    color: #636e72;
+    font-size: 0.95rem;
+}
+
+.cta-gallery__icon {
+    font-size: 1.5rem;
+}
+
+body.cta-lightbox-open {
+    overflow: hidden;
+}
+
+.cta-gallery__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-gallery__lightbox.is-open {
+    display: flex;
+}
+
+.cta-gallery__lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.cta-gallery__lightbox-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 2rem 3.5rem;
+    max-width: min(960px, 90vw);
+    max-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+    outline: none;
+}
+
+.cta-gallery__lightbox-close,
+.cta-gallery__lightbox-prev,
+.cta-gallery__lightbox-next {
+    position: absolute;
+    top: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #ffffff;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: background 0.2s ease;
+}
+
+.cta-gallery__lightbox-close:hover,
+.cta-gallery__lightbox-prev:hover,
+.cta-gallery__lightbox-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.cta-gallery__lightbox-close {
+    right: 1rem;
+}
+
+.cta-gallery__lightbox-prev,
+.cta-gallery__lightbox-next {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cta-gallery__lightbox-prev {
+    left: 1rem;
+}
+
+.cta-gallery__lightbox-next {
+    right: 1rem;
+}
+
+.cta-gallery__lightbox-figure {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.cta-gallery__lightbox-image {
+    max-height: 60vh;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f1f2f6;
+}
+
+.cta-gallery__lightbox-caption {
+    color: #2d3436;
+}
+
+.cta-gallery__lightbox-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.4rem;
+}
+
+.cta-gallery__lightbox-text {
+    margin: 0;
+    color: #636e72;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .cta-gallery__lightbox-content {
+        padding: 1.5rem;
+    }
+
+    .cta-gallery__lightbox-prev,
+    .cta-gallery__lightbox-next {
+        display: none;
+    }
+
+    .cta-gallery__lightbox-image {
+        max-height: 50vh;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .cta-gallery__tabs {
+        justify-content: flex-start;
+    }
+
+    .cta-gallery__tabs button {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.cta-section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    color: #e17055;
+}
+
+.cta-section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0.75rem 0;
+    color: #2d3436;
+}
+
+.cta-section-lead {
+    font-size: 1.1rem;
+    color: #636e72;
+    max-width: 720px;
+}
+
+/* About */
+.cta-about {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    direction: ltr;
+}
+
+.cta-about__intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.cta-about__grid {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.cta-about__card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: left;
+}
+
+.cta-about__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(237, 137, 54, 0.18);
+    border-color: #fdcb6e;
+}
+
+.cta-about__icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-about__card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: #2d3436;
+}
+
+.cta-about__card p {
+    font-size: 1.05rem;
+    color: #636e72;
+    line-height: 1.7;
+}
+
+.cta-about__quote {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.cta-about__quote blockquote {
+    display: inline-block;
+    background: rgba(253, 203, 110, 0.16);
+    border-left: 4px solid #e17055;
+    padding: 2rem 2.5rem;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #d35400;
+    border-radius: 12px;
+    max-width: 640px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .cta-about__card {
+        text-align: center;
+    }
+
+    .cta-about__card p {
+        font-size: 1rem;
+    }
+}

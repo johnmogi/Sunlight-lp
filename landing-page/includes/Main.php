@@ -21,7 +21,7 @@ class Main {
 
         // Register all shortcodes
         add_shortcode('sunlight_hero', [$this, 'hero_shortcode_v2']);
-        add_shortcode('sunlight_hero_slider', [$this, 'hero_slider_shortcode']);
+        // sunlight_hero_slider is now handled by CTASlider\Controller\HeroSliderController
         add_shortcode('sunlight_about', [$this, 'about_shortcode']);
         add_shortcode('sunlight_gallery', [$this, 'gallery_shortcode']);
         add_shortcode('sunlight_video', [$this, 'video_shortcode']);
@@ -74,6 +74,8 @@ class Main {
     }
     
     public function output_styles() {
+        // Hero slider styles now loaded via cta-slider module
+        // Only output non-hero-slider styles
         echo '<style id="sunlight-landing-styles">';
         echo $this->get_inline_styles();
         echo '</style>';
@@ -272,180 +274,7 @@ class Main {
         return ob_get_clean();
     }
 
-    public function hero_slider_shortcode($atts) {
-        $atts = shortcode_atts(array(), $atts);
-
-        ob_start();
-        ?>
-        <div class="sunlight-full-width">
-        <section class="sunlight-hero-slider" id="hero-slider">
-            <div class="hero-overlay"></div>
-
-            <!-- Carousel Container -->
-            <div class="hero-carousel">
-                <!-- Navigation Arrows -->
-                <button class="carousel-nav carousel-prev" id="slider-prev" aria-label="Previous slide">
-                    <span class="nav-icon nav-icon-prev"></span>
-                </button>
-                <button class="carousel-nav carousel-next" id="slider-next" aria-label="Next slide">
-                    <span class="nav-icon nav-icon-next"></span>
-                </button>
-
-                <!-- Carousel Slides -->
-                <div class="carousel-track">
-                    <!-- Slide 1: Sunlight Tarot -->
-                    <div class="carousel-slide active slide-0" data-slide="0">
-                        <div class="hero-content">
-                            <div class="hero-brand">
-                                <span class="hero-pre-title">✨ The Evolution of Tarot</span>
-                                <h1 class="hero-title">Sunlight Tarot</h1>
-                                <h2 class="hero-subtitle-main">A New Light on the Tarot Tradition</h2>
-                            </div>
-
-                            <div class="hero-description-block">
-                                <p class="hero-description">Not a tool for fortune-telling.<br>
-                                A living map of consciousness — science, soul, and art entwined.</p>
-                                <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding.</p>
-                            </div>
-
-                            <div class="hero-quick-signup" id="form-tarot">
-                                <div class="signup-header">
-                                    <h3>Join the Sunlight Tarot Project</h3>
-                                    <p>Early access to artwork, deck updates, and community</p>
-                                </div>
-                                <form class="quick-signup-form hero-signup-form">
-                                    <?php wp_nonce_field('sunlight_signup_nonce', 'tarot_signup_nonce'); ?>
-                                    <input type="hidden" name="project" value="sunlight-tarot">
-                                    <div class="form-row">
-                                        <input type="text" name="name" placeholder="Your Name" required>
-                                        <input type="email" name="email" placeholder="Your Email" required>
-                                        <button type="submit" class="quick-join-btn">
-                                            <span>Join ✨</span>
-                                        </button>
-                                    </div>
-                                    <div class="form-footer">
-                                        <label class="consent-label">
-                                            <input type="checkbox" name="consent" required>
-                                            <span>I agree to receive updates about Sunlight Tarot.</span>
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-tarot">
-                                    <span class="cta-icon">✨</span>
-                                    <span class="cta-text">I Want to Participate</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2: Maze Chronicles Novels -->
-                    <div class="carousel-slide slide-1" data-slide="1">
-                        <div class="hero-content">
-                            <div class="hero-brand">
-                                <span class="hero-pre-title">📚 The Literary Journey</span>
-                                <h1 class="hero-title">Maze Chronicles</h1>
-                                <h2 class="hero-subtitle-main">Four Novels, One Consciousness</h2>
-                            </div>
-
-                            <div class="hero-description-block">
-                                <p class="hero-description">Beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em>.<br>
-                                A mind-bending journey through consciousness, reality, and transformation.</p>
-                                <p class="hero-subtext">Where every choice shapes reality and every page opens new dimensions.</p>
-                            </div>
-
-                            <div class="hero-quick-signup" id="form-novels">
-                                <div class="signup-header">
-                                    <h3>Join the Maze Chronicles Journey</h3>
-                                    <p>Get notified about releases, excerpts, and special editions</p>
-                                </div>
-                                <form class="quick-signup-form hero-signup-form">
-                                    <?php wp_nonce_field('sunlight_signup_nonce', 'novels_signup_nonce'); ?>
-                                    <input type="hidden" name="project" value="maze-chronicles">
-                                    <div class="form-row">
-                                        <input type="text" name="name" placeholder="Your Name" required>
-                                        <input type="email" name="email" placeholder="Your Email" required>
-                                        <button type="submit" class="quick-join-btn">
-                                            <span>Join 📚</span>
-                                        </button>
-                                    </div>
-                                    <div class="form-footer">
-                                        <label class="consent-label">
-                                            <input type="checkbox" name="consent" required>
-                                            <span>I agree to receive updates about Maze Chronicles.</span>
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-novels">
-                                    <span class="cta-icon">📖</span>
-                                    <span class="cta-text">Get Early Access</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3: Maze Game -->
-                    <div class="carousel-slide slide-2" data-slide="2">
-                        <div class="hero-content">
-                            <div class="hero-brand">
-                                <span class="hero-pre-title">🎮 The Interactive Experience</span>
-                                <h1 class="hero-title">The Maze Game</h1>
-                                <h2 class="hero-subtitle-main">Play Your Way to Awakening</h2>
-                            </div>
-
-                            <div class="hero-description-block">
-                                <p class="hero-description">A tabletop and digital experience where consciousness is the game.<br>
-                                Every choice matters. Every path leads to transformation.</p>
-                                <p class="hero-subtext">Strategy meets mysticism in an unforgettable journey through the self.</p>
-                            </div>
-
-                            <div class="hero-quick-signup" id="form-game">
-                                <div class="signup-header">
-                                    <h3>Join the Maze Game Community</h3>
-                                    <p>Playtest access, development updates, and exclusive content</p>
-                                </div>
-                                <form class="quick-signup-form hero-signup-form">
-                                    <?php wp_nonce_field('sunlight_signup_nonce', 'game_signup_nonce'); ?>
-                                    <input type="hidden" name="project" value="maze-game">
-                                    <div class="form-row">
-                                        <input type="text" name="name" placeholder="Your Name" required>
-                                        <input type="email" name="email" placeholder="Your Email" required>
-                                        <button type="submit" class="quick-join-btn">
-                                            <span>Join 🎮</span>
-                                        </button>
-                                    </div>
-                                    <div class="form-footer">
-                                        <label class="consent-label">
-                                            <input type="checkbox" name="consent" required>
-                                            <span>I agree to receive updates about the Maze Game.</span>
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-game">
-                                    <span class="cta-icon">🎲</span>
-                                    <span class="cta-text">Join the Playtest</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <?php
-        return ob_get_clean();
-    }
+    // hero_slider_shortcode removed - now handled by CTASlider\Controller\HeroSliderController
 
     public function hero_shortcode($atts) {
         $atts = shortcode_atts(array(
@@ -1203,30 +1032,93 @@ class Main {
             direction: ltr !important;
         }
 
-        .sunlight-hero-slider {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e17055 100%);
-            background-size: cover;
-            background-position: center;
-            color: #2d3436;
-            text-align: center;
-            width: 100vw !important;
-            margin-left: calc(50% - 50vw) !important;
-            margin-right: calc(50% - 50vw) !important;
-            padding: 3rem 0 4rem !important;
-            box-sizing: border-box !important;
-            overflow: hidden;
+        /* Hero slider styles removed - now in cta-slider/assets/css/hero-slider.css */
+
+        /* Container & Sections */
+        .container { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+        .section-label { display: inline-block; padding: 0.5rem 1.5rem; background: #fdcb6e; color: #2d3436; border-radius: 20px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 3.5rem); text-align: center; margin-bottom: 1rem; color: #2d3436; font-weight: 700; }
+        .section-lead { text-align: center; font-size: 1.3rem; color: #636e72; margin-bottom: 3rem; font-style: italic; }
+        
+        /* About Section - Enhanced */
+        .sunlight-about { background: linear-gradient(to bottom, #fff 0%, #f8f9fa 100%); }
+        .about-intro { text-align: center; margin-bottom: 3rem; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .about-card { background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 2px solid transparent; }
+        .about-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-color: #fdcb6e; }
+        .card-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .about-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #2d3436; }
+        .about-card p { font-size: 1.05rem; line-height: 1.7; color: #636e72; }
+        .about-quote { text-align: center; margin-top: 3rem; }
+        .about-quote blockquote { font-size: 1.8rem; font-style: italic; color: #e17055; font-weight: 300; max-width: 700px; margin: 0 auto; padding: 2rem; border-left: 4px solid #fdcb6e; background: rgba(253,203,110,0.1); border-radius: 10px; }
+        
+        /* Gallery Section - Enhanced */
+        .sunlight-gallery { background: #f8f9fa; }
+        .gallery-intro-section { text-align: center; margin-bottom: 3rem; }
+        .gallery-intro { font-size: 1.15rem; color: #636e72; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+        .gallery-tabs-container { margin-bottom: 3rem; }
+        .gallery-tabs { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .tab-button { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border: 3px solid #fdcb6e; background: white; color: #2d3436; cursor: pointer; border-radius: 15px; font-weight: 600; transition: all 0.3s ease; min-width: 140px; }
+        .tab-button:hover { background: rgba(253,203,110,0.2); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .tab-button.active { background: #fdcb6e; color: white; box-shadow: 0 5px 20px rgba(253,203,110,0.4); }
+        .tab-icon { font-size: 2rem; }
+        .tab-label { font-size: 1rem; }
+        .tab-pane { display: none; animation: fadeIn 0.3s ease; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-description { text-align: center; font-size: 1.1rem; color: #636e72; margin-bottom: 2rem; font-style: italic; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .gallery-item { aspect-ratio: 1; border-radius: 15px; overflow: hidden; transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.05); }
+        .gallery-item.placeholder { background: linear-gradient(135deg, #e0e0e0, #f5f5f5); display: flex; align-items: center; justify-content: center; text-align: center; }
+        .placeholder-content { padding: 2rem; }
+        .placeholder-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .placeholder-content p { font-size: 1.2rem; color: #666; font-weight: 600; margin-bottom: 0.5rem; }
+        .placeholder-content small { font-size: 0.95rem; color: #999; }
+        .sunlight-video { background: #fff; }
+        .video-intro { text-align: center; font-size: 1.1rem; margin-bottom: 2rem; color: #636e72; }
+        .video-wrapper { max-width: 800px; margin: 0 auto; }
+        .video-placeholder { aspect-ratio: 16/9; background: linear-gradient(135deg, #e0e0e0, #f5f5f5); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 10px; }
+        .placeholder-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .sunlight-signup { background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); }
+        .signup-intro { text-align: center; font-size: 1.1rem; margin-bottom: 2rem; color: #2d3436; }
+        .signup-form { max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2d3436; }
+        .form-group input[type='text'], .form-group input[type='email'] { width: 100%; padding: 0.75rem; border: 2px solid #dfe6e9; border-radius: 5px; font-size: 1rem; }
+        .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; font-weight: normal; }
+        .signup-submit { width: 100%; padding: 1rem; background: #2d3436; color: #ffeaa7; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .signup-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .signup-success { max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; text-align: center; }
+        .form-message { margin-top: 1rem; padding: 0.75rem; border-radius: 5px; text-align: center; }
+        .sunlight-vision { background: #fff; }
+        .vision-intro { text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: #636e72; }
+        .vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .vision-item { text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 10px; transition: transform 0.3s ease; }
+        .vision-item:hover { transform: translateY(-5px); }
+        .vision-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .vision-item h3 { margin-bottom: 1rem; color: #2d3436; }
+        .vision-footer { text-align: center; font-size: 1.1rem; font-style: italic; color: #636e72; }
+        .sunlight-footer { background: #2d3436; color: #ffeaa7; padding: 3rem 2rem 2rem; text-align: center; }
+        .footer-tagline { font-size: 1.5rem; font-style: italic; margin-bottom: 1.5rem; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: #ffeaa7; text-decoration: none; transition: opacity 0.3s ease; }
+        .footer-links a:hover { opacity: 0.7; }
+        .footer-copyright { font-size: 0.9rem; opacity: 0.8; }
+        
+        /* Responsive Mobile Styles */
+        @media (max-width: 768px) {
+            .sunlight-hero { padding: 1rem; }
+            .container { padding: 3rem 1.5rem; }
         }
-        .sunlight-hero-slider .carousel-slide {
+        
+        body.page-id-2 #masthead,
             display: none;
             position: relative;
-            min-height: 50vh;
-            padding: 4rem 2rem;
+            min-height: 60vh;
+            padding: 4.5rem 2.5rem;
             width: 100vw;
             max-width: none;
             margin-left: calc(50% - 50vw);
@@ -1251,12 +1143,12 @@ class Main {
             position: relative;
             width: 100vw;
             max-width: none;
-            padding: 0 2rem;
+            padding: 0 2.5rem;
             margin-left: calc(50% - 50vw);
             margin-right: calc(50% - 50vw);
-            height: 60vh; /* Fixed height instead of 100% */
+            min-height: 65vh;
             z-index: 2;
-            margin-bottom: 3rem; /* Add spacing before forms */
+            margin-bottom: 3.5rem;
         }
         
         /* Carousel Track */
@@ -1367,10 +1259,10 @@ class Main {
         
         /* Hero CTA Container - Rebuilt */
         .hero-cta-container { 
-            margin: 1.5rem auto 0.75rem; 
+            margin: 1rem auto 0; 
             position: relative;
             z-index: 100;
-            max-width: 600px;
+            max-width: 620px;
         }
         
         .hero-cta-toggle { 
@@ -1415,9 +1307,9 @@ class Main {
         
         /* Quick Signup Form - Rebuilt */
         .hero-quick-signup {
-            margin: 0.75rem auto 0;
+            margin: 1rem auto 0;
             background: rgba(255,255,255,0.98);
-            padding: 1.5rem 1.75rem;
+            padding: 1.75rem 2rem;
             border-radius: 15px;
             box-shadow: 0 12px 32px rgba(0,0,0,0.25);
             max-height: 0;
@@ -1429,9 +1321,9 @@ class Main {
         }
 
         .hero-quick-signup.show {
-            max-height: 520px;
+            max-height: 540px;
             opacity: 1;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
             transform: translateY(0);
         }
         .signup-header { margin-bottom: 1.5rem; }
@@ -1548,35 +1440,25 @@ class Main {
                 font-size: 1.8rem;
             }
             .carousel-prev {
-                left: 0.5rem;
+                left: 0.75rem;
             }
             .carousel-next {
-                right: 0.5rem;
-            }
-            .carousel-indicators {
-                bottom: 0.75rem;
-            }
-            .carousel-indicators .indicator {
-                width: 8px;
-                height: 8px;
-                border-width: 1px;
-            }
-            .carousel-indicators .indicator.active {
-                width: 24px;
+                right: 0.75rem;
             }
 
             /* Hero slider mobile adjustments */
             .hero-carousel {
-                height: 50vh !important; /* Shorter on mobile */
-                margin-bottom: 2rem !important;
+                min-height: 55vh !important;
+                margin-bottom: 2.25rem !important;
+                padding: 0 1.5rem !important;
             }
             .sunlight-hero-slider .carousel-slide {
-                min-height: 40vh !important; /* Shorter slides on mobile */
-                padding: 2rem 1rem !important;
+                min-height: 45vh !important;
+                padding: 2.5rem 1.5rem !important;
             }
             .sunlight-hero-slider .hero-forms-section {
-                margin-top: 2rem !important;
-                padding: 1rem !important;
+                margin-top: 2.5rem !important;
+                padding: 1.25rem !important;
             }
         }
         

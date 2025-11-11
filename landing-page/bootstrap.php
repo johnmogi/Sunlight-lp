@@ -24,6 +24,10 @@ spl_autoload_register(function ($class) {
     }
 
     $relative_class = substr($class, $len);
+    
+    // Convert namespace to file path
+    // Handle special case: CTASlider namespace -> cta-slider directory
+    $relative_class = str_replace('CTASlider\\', 'cta-slider/', $relative_class);
     $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
     if (file_exists($file)) {
@@ -37,6 +41,16 @@ if (function_exists('add_action')) {
         // Initialize the landing page functionality
         if (class_exists('\\LandingPage\\Main')) {
             \LandingPage\Main::get_instance();
+        } else {
+            error_log('Landing Page Plugin: Main class not found');
+        }
+        
+        // Initialize the CTA Slider Controller
+        if (class_exists('\\LandingPage\\CTASlider\\Controller\\HeroSliderController')) {
+            new \LandingPage\CTASlider\Controller\HeroSliderController();
+            error_log('Landing Page Plugin: HeroSliderController initialized');
+        } else {
+            error_log('Landing Page Plugin: HeroSliderController class not found');
         }
     });
 } else {
