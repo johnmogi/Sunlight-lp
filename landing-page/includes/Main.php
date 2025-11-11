@@ -308,14 +308,6 @@ class Main {
                                 <p class="hero-subtext">Reimagining the Tarot as a bridge between mysticism and modern understanding.</p>
                             </div>
 
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-tarot">
-                                    <span class="cta-icon">✨</span>
-                                    <span class="cta-text">I Want to Participate</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
-                            </div>
-
                             <div class="hero-quick-signup" id="form-tarot">
                                 <div class="signup-header">
                                     <h3>Join the Sunlight Tarot Project</h3>
@@ -339,6 +331,14 @@ class Main {
                                     </div>
                                 </form>
                             </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-tarot">
+                                    <span class="cta-icon">✨</span>
+                                    <span class="cta-text">I Want to Participate</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -355,14 +355,6 @@ class Main {
                                 <p class="hero-description">Beginning with <em>The Boring Field Guide to Fantastic Multidimensional Portals</em>.<br>
                                 A mind-bending journey through consciousness, reality, and transformation.</p>
                                 <p class="hero-subtext">Where every choice shapes reality and every page opens new dimensions.</p>
-                            </div>
-
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-novels">
-                                    <span class="cta-icon">📖</span>
-                                    <span class="cta-text">Get Early Access</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
                             </div>
 
                             <div class="hero-quick-signup" id="form-novels">
@@ -388,6 +380,14 @@ class Main {
                                     </div>
                                 </form>
                             </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-novels">
+                                    <span class="cta-icon">📖</span>
+                                    <span class="cta-text">Get Early Access</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -404,14 +404,6 @@ class Main {
                                 <p class="hero-description">A tabletop and digital experience where consciousness is the game.<br>
                                 Every choice matters. Every path leads to transformation.</p>
                                 <p class="hero-subtext">Strategy meets mysticism in an unforgettable journey through the self.</p>
-                            </div>
-
-                            <div class="hero-cta-container">
-                                <button class="hero-cta-toggle" data-form="form-game">
-                                    <span class="cta-icon">🎲</span>
-                                    <span class="cta-text">Join the Playtest</span>
-                                    <span class="cta-arrow">▼</span>
-                                </button>
                             </div>
 
                             <div class="hero-quick-signup" id="form-game">
@@ -437,16 +429,18 @@ class Main {
                                     </div>
                                 </form>
                             </div>
+
+                            <div class="hero-cta-container">
+                                <button class="hero-cta-toggle" data-form="form-game">
+                                    <span class="cta-icon">🎲</span>
+                                    <span class="cta-text">Join the Playtest</span>
+                                    <span class="cta-arrow">▼</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Carousel Indicators -->
-                <div class="carousel-indicators">
-                    <button class="indicator active"></button>
-                    <button class="indicator"></button>
-                    <button class="indicator"></button>
-                </div>
             </div>
         </section>
         <?php
@@ -1336,28 +1330,25 @@ class Main {
 
         .carousel-nav .nav-icon {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            position: relative;
+            width: 16px;
+            height: 16px;
+            border-top: 4px solid #2d3436;
+            border-right: 4px solid #2d3436;
+            border-radius: 2px;
+            transition: border-color 0.3s ease;
         }
 
-        .carousel-nav .nav-icon::before,
-        .carousel-nav .nav-icon::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 100%;
-            background: #2d3436;
-            border-radius: 4px;
-            top: 0;
-            transition: transform 0.3s ease;
+        .carousel-nav:hover .nav-icon {
+            border-color: #1a1a1a;
         }
 
-        .nav-icon-prev::before { left: 7px; transform: rotate(40deg); }
-        .nav-icon-prev::after { left: 7px; transform: rotate(-40deg); }
+        .nav-icon-prev {
+            transform: rotate(225deg);
+        }
 
-        .nav-icon-next::before { right: 7px; transform: rotate(-40deg); }
-        .nav-icon-next::after { right: 7px; transform: rotate(40deg); }
+        .nav-icon-next {
+            transform: rotate(45deg);
+        }
 
         .carousel-prev {
             left: 2rem;
@@ -1367,38 +1358,6 @@ class Main {
             right: 2rem;
         }
         
-        /* Carousel Indicators */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 100;
-        }
-        
-        .carousel-indicators .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: 2px solid rgba(255,255,255,0.8);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 0;
-        }
-        
-        .carousel-indicators .indicator:hover {
-            background: rgba(255,255,255,0.8);
-            transform: scale(1.2);
-        }
-        
-        .carousel-indicators .indicator.active {
-            background: #fff;
-            width: 40px;
-            border-radius: 10px;
-        }
         .hero-pre-title { display: inline-block; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; background: rgba(255,255,255,0.95); color: #2d3436; padding: 0.5rem 1.5rem; border-radius: 25px; }
         .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.5rem; font-weight: 800; text-shadow: 3px 3px 8px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3); color: #fff; }
         .hero-subtitle-main { font-size: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 1.5rem; font-weight: 300; font-style: italic; text-shadow: 2px 2px 6px rgba(0,0,0,0.5); color: #fff; }
@@ -1456,23 +1415,23 @@ class Main {
         
         /* Quick Signup Form - Rebuilt */
         .hero-quick-signup {
-            margin: 1rem auto 0;
+            margin: 0.75rem auto 0;
             background: rgba(255,255,255,0.98);
-            padding: 1.75rem;
+            padding: 1.5rem 1.75rem;
             border-radius: 15px;
             box-shadow: 0 12px 32px rgba(0,0,0,0.25);
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.35s ease;
+            transform: translateY(-6px);
+            transition: all 0.3s ease;
             max-width: 560px;
         }
 
         .hero-quick-signup.show {
             max-height: 520px;
             opacity: 1;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             transform: translateY(0);
         }
         .signup-header { margin-bottom: 1.5rem; }
@@ -1689,99 +1648,64 @@ class Main {
             // Initialize - forms start hidden via CSS
             
             // Carousel Variables
-            var currentSlide = 0;
-            var totalSlides = 3;
-            
-            // Carousel Navigation Function (for old hero)
-            function goToSlide(slideIndex) {
-                // Hide all forms when switching slides
-                \$('.hero-quick-signup').removeClass('show');
-                \$('.hero-cta-toggle').removeClass('active');
-                
-                // Remove active class from all slides and indicators
-                \$('.carousel-slide').removeClass('active');
-                \$('.carousel-indicators .indicator').removeClass('active');
-                
-                // Add active class to current slide and indicator
-                \$('.carousel-slide.slide-' + slideIndex).addClass('active');
-                \$('.carousel-indicators .indicator').eq(slideIndex).addClass('active');
-                
-                currentSlide = slideIndex;
+            var sliderSlides = $('.sunlight-hero-slider .carousel-slide');
+            var sliderTotal = sliderSlides.length;
+            var currentSlide = sliderSlides.index(sliderSlides.filter('.active'));
+            currentSlide = currentSlide >= 0 ? currentSlide : 0;
+
+            function normalizeIndex(index) {
+                if (!sliderTotal) {
+                    return 0;
+                }
+                return (index + sliderTotal) % sliderTotal;
             }
-            
-            // Slider Navigation Function (for new hero_slider - forms stay active per slide)
+
             function goToSliderSlide(slideIndex) {
-                // Hide all forms when switching slides
-                \$('.sunlight-hero-slider .hero-quick-signup').removeClass('show');
-                \$('.sunlight-hero-slider .hero-cta-toggle').removeClass('active');
-                
-                // Remove active class from all slides and indicators
-                \$('.sunlight-hero-slider .carousel-slide').removeClass('active');
-                \$('.sunlight-hero-slider .carousel-indicators .indicator').removeClass('active');
-                
-                // Add active class to current slide and indicator
-                \$('.sunlight-hero-slider .carousel-slide.slide-' + slideIndex).addClass('active');
-                \$('.sunlight-hero-slider .carousel-indicators .indicator').eq(slideIndex).addClass('active');
-                
-                currentSlide = slideIndex;
+                if (!sliderTotal) {
+                    return;
+                }
+
+                currentSlide = normalizeIndex(slideIndex);
+
+                sliderSlides.removeClass('active');
+
+                var \$targetSlide = sliderSlides.filter('.slide-' + currentSlide);
+                if (!\$targetSlide.length) {
+                    \$targetSlide = sliderSlides.eq(currentSlide);
+                }
+
+                \$targetSlide.addClass('active');
+
+                var \$slider = $('.sunlight-hero-slider');
+                \$slider.find('.hero-quick-signup').removeClass('show');
+                \$slider.find('.hero-cta-toggle').removeClass('active');
             }
-            
-            // Next Slide (old hero)
-            \$('#carousel-next').on('click', function() {
-                var nextSlide = (currentSlide + 1) % totalSlides;
-                goToSlide(nextSlide);
+
+            $('#slider-next').on('click', function(e) {
+                e.preventDefault();
+                goToSliderSlide(currentSlide + 1);
             });
-            
-            // Previous Slide (old hero)
-            \$('#carousel-prev').on('click', function() {
-                var prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                goToSlide(prevSlide);
+
+            $('#slider-prev').on('click', function(e) {
+                e.preventDefault();
+                goToSliderSlide(currentSlide - 1);
             });
-            
-            // Next Slide (new hero slider)
-            \$('#slider-next').on('click', function() {
-                var nextSlide = (currentSlide + 1) % totalSlides;
-                goToSliderSlide(nextSlide);
+
+            var sliderAutoPlayInterval = null;
+            if (sliderTotal > 1) {
+                sliderAutoPlayInterval = setInterval(function() {
+                    goToSliderSlide(currentSlide + 1);
+                }, 15000);
+            }
+
+            $('.carousel-nav').on('click', function() {
+                if (sliderAutoPlayInterval) {
+                    clearInterval(sliderAutoPlayInterval);
+                    sliderAutoPlayInterval = null;
+                }
             });
-            
-            // Previous Slide (new hero slider)
-            \$('#slider-prev').on('click', function() {
-                var prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                goToSliderSlide(prevSlide);
-            });
-            
-            // Indicator Navigation (old hero)
-            \$('.carousel-indicators .indicator').on('click', function() {
-                var slideIndex = \$(this).index();
-                goToSlide(slideIndex);
-            });
-            
-            // Indicator Navigation (new hero slider)
-            \$('.sunlight-hero-slider .carousel-indicators .indicator').on('click', function() {
-                var slideIndex = \$(this).index();
-                goToSliderSlide(slideIndex);
-            });
-            
-            // Auto-play Carousel (slowed down to 15 seconds)
-            var autoPlayInterval = setInterval(function() {
-                var nextSlide = (currentSlide + 1) % totalSlides;
-                goToSlide(nextSlide);
-            }, 15000);
-            
-            // Auto-play Slider (for new hero slider)
-            var sliderAutoPlayInterval = setInterval(function() {
-                var nextSlide = (currentSlide + 1) % totalSlides;
-                goToSliderSlide(nextSlide);
-            }, 15000);
-            
-            // Pause auto-play on user interaction
-            \$('.carousel-nav, .carousel-indicators .indicator').on('click', function() {
-                clearInterval(autoPlayInterval);
-                clearInterval(sliderAutoPlayInterval);
-            });
-            
-            // Hero CTA Toggle - Rebuilt with simple class-based approach
-            \$('.hero-cta-toggle').on('click', function(e) {
+
+            $('.hero-cta-toggle').on('click', function(e) {
                 e.preventDefault();
                 
                 var \$button = \$(this);
@@ -1795,6 +1719,11 @@ class Main {
                 // Toggle this form
                 \$form.toggleClass('show');
                 \$button.toggleClass('active');
+
+                if (sliderAutoPlayInterval) {
+                    clearInterval(sliderAutoPlayInterval);
+                    sliderAutoPlayInterval = null;
+                }
             });
             
             // Hero Signup Forms - Handle all forms dynamically
