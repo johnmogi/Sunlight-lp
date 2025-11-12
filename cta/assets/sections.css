@@ -4,6 +4,413 @@
     padding: 0 1.5rem;
 }
 
+/* Video */
+.cta-video {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #fff 0%, #f4f6fb 100%);
+    direction: ltr;
+}
+
+.cta-video__intro {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.cta-video__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.cta-video__player {
+    background: #0d1117;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(13, 17, 23, 0.25);
+}
+
+.cta-video__embed iframe,
+.cta-video__embed video {
+    width: 100%;
+    min-height: 340px;
+    border: none;
+    display: block;
+}
+
+.cta-video__player-details {
+    padding: 1.75rem 2rem 2rem;
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.9) 0%, rgba(13, 17, 23, 0.7) 100%);
+    color: #fff;
+}
+
+.cta-video__player-meta {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.cta-video__player-title {
+    font-size: 1.8rem;
+    margin: 0.65rem 0;
+}
+
+.cta-video__player-description {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.cta-video__playlist {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 30px rgba(13, 17, 23, 0.08);
+    border: 1px solid rgba(116, 125, 140, 0.18);
+}
+
+.cta-video__playlist-heading {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    color: #2d3436;
+}
+
+.cta-video__playlist-description {
+    margin: 0 0 1.5rem;
+    color: #636e72;
+    font-size: 0.95rem;
+}
+
+.cta-video__playlist-items {
+    display: grid;
+    gap: 1rem;
+}
+
+.cta-video__playlist-button {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 14px;
+    border: 2px solid transparent;
+    background: #f6f7fb;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-video__playlist-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(13, 17, 23, 0.08);
+}
+
+.cta-video__playlist-button.is-active {
+    border-color: #2d3436;
+    background: #ffffff;
+}
+
+.cta-video__thumb {
+    width: 100%;
+    height: 72px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2d3436;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.cta-video__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cta-video__playlist-body {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.cta-video__playlist-meta {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a0a6ad;
+}
+
+.cta-video__playlist-title {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #2d3436;
+}
+
+.cta-video__playlist-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.cta-media {
+    margin-top: 4rem;
+}
+
+.cta-media__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cta-media__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.cta-media__card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(13, 17, 23, 0.08);
+    border: 1px solid rgba(116, 125, 140, 0.16);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cta-media__embed iframe,
+.cta-media__embed audio {
+    width: 100%;
+    min-height: 210px;
+    border: none;
+    display: block;
+}
+
+.cta-media__body {
+    padding: 1.5rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.cta-media__meta {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #a0a6ad;
+}
+
+.cta-media__title {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2d3436;
+}
+
+.cta-media__description {
+    margin: 0;
+    color: #636e72;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.cta-media__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.cta-media__play {
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    border: 2px solid #2d3436;
+    background: transparent;
+    color: #2d3436;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cta-media__play:hover {
+    background: #2d3436;
+    color: #ffffff;
+}
+
+.cta-media__link {
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: #f1f2f6;
+    color: #2d3436;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cta-media__link:hover {
+    background: #dfe4ea;
+}
+
+/* Signup */
+.cta-signup {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #0b1320 0%, #111a2b 100%);
+    color: #ffffff;
+    direction: ltr;
+}
+
+.cta-signup .cta-container {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+}
+
+.cta-signup__content .cta-section-label {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.cta-signup__content .cta-section-title {
+    color: #ffffff;
+}
+
+.cta-signup__content .cta-section-lead {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.cta-signup__list {
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.cta-signup__list li {
+    position: relative;
+    padding-left: 1.75rem;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.cta-signup__list li::before {
+    content: '✶';
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    color: #f9ca24;
+    font-size: 1.1rem;
+}
+
+.cta-signup__form {
+    background: rgba(10, 76, 102, 0.12);
+    border: 1px solid rgba(104, 162, 186, 0.25);
+    border-radius: 20px;
+    padding: 2.25rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 24px 60px rgba(10, 76, 102, 0.25);
+}
+
+.cta-signup__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-signup__field label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.cta-signup__field input {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.cta-signup__field input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.cta-signup__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.4rem;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #f9ca24 0%, #e17055 100%);
+    color: #111a2b;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-signup__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(233, 196, 106, 0.45);
+}
+
+.cta-signup__submit-icon {
+    font-size: 1.2rem;
+}
+
+.cta-signup__message {
+    margin-top: 1.5rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.cta-signup__message.is-success {
+    display: block !important;
+    background: rgba(46, 213, 115, 0.16);
+    color: #2ecc71;
+}
+
+.cta-signup__message.is-error {
+    display: block !important;
+    background: rgba(255, 99, 71, 0.18);
+    color: #ff6b6b;
+}
+
+.cta-signup__privacy {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 768px) {
+    .cta-signup__form {
+        padding: 1.75rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .cta-video__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-video__playlist {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .cta-video__embed iframe,
+    .cta-video__embed video {
+        min-height: 220px;
+    }
+
+    .cta-video__playlist-button {
+        grid-template-columns: 72px 1fr;
+    }
+}
+
 /* About — Connected Universe */
 .cta-about__universe {
     margin: 3rem auto;
@@ -242,15 +649,20 @@ body.cta-lightbox-open {
     background: rgba(0, 0, 0, 0.6);
     border: none;
     color: #ffffff;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     transition: background 0.2s ease;
+}
+
+.cta-gallery__lightbox-close {
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.75);
 }
 
 .cta-gallery__lightbox-close:hover,

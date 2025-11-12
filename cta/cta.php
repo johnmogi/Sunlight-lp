@@ -33,7 +33,11 @@ spl_autoload_register(function ($class) {
 
 // Initialize plugin
 add_action('plugins_loaded', function() {
-    if (class_exists('CTA\\Shortcode\\Registry')) {
+    if (class_exists('CTA\Shortcode\Registry')) {
         \CTA\Shortcode\Registry::register();
+    }
+
+    if (class_exists('CTA\Service\EmbedService')) {
+        \CTA\Service\EmbedService::boot();
     }
 });

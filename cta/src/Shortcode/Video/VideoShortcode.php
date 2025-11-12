@@ -20,6 +20,10 @@ class VideoShortcode
         ], $atts, 'cta_video');
 
         $content = VideoConfig::getContent();
+        $ajax = [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('cta_nonce'),
+        ];
 
         ob_start();
         include CTA_PLUGIN_DIR . '/src/View/video.php';

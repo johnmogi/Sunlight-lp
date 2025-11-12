@@ -5,6 +5,7 @@ use CTA\Shortcode\About\AboutShortcode;
 use CTA\Shortcode\Slider\SliderShortcode;
 use CTA\Shortcode\Video\VideoShortcode;
 use CTA\Shortcode\Gallery\GalleryShortcode;
+use CTA\Shortcode\Signup\SignupShortcode;
 
 class Registry
 {
@@ -14,6 +15,7 @@ class Registry
         new AboutShortcode();
         new VideoShortcode();
         new GalleryShortcode();
+        new SignupShortcode();
         // @todo register other shortcodes as they are implemented
     }
 }

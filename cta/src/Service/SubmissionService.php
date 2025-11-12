@@ -11,8 +11,6 @@ class SubmissionService {
 
     private function registerCPT() {
         add_action('init', function() {
-            error_log('CTA Plugin: Registering CPT cta_submission');
-            
             register_post_type('cta_submission', [
                 'labels' => [
                     'name' => 'CTA Submissions',
