@@ -1,0 +1,131 @@
+.lang-switcher--header {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+}
+
+.lang-switcher__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    line-height: 1;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-switcher__toggle:hover,
+.lang-switcher__toggle:focus {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.55);
+    outline: none;
+}
+
+.lang-switcher__icon {
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+.lang-switcher.is-open .lang-switcher__icon {
+    transform: rotate(180deg);
+}
+
+.lang-switcher__list {
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem 0;
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    right: 0;
+    min-width: 9rem;
+    border-radius: 0.75rem;
+    background: rgba(12, 24, 38, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 40px rgba(10, 20, 30, 0.35);
+    display: none;
+    z-index: 20;
+}
+
+.lang-switcher.is-open .lang-switcher__list {
+    display: block;
+}
+
+.lang-switcher__item {
+    margin: 0;
+}
+
+.lang-switcher__link {
+    display: block;
+    padding: 0.45rem 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-switcher__link:hover,
+.lang-switcher__link:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    outline: none;
+}
+
+.lang-switcher__item.is-active .lang-switcher__link {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Menu item context styles */
+.menu-item-language-switcher {
+    position: relative;
+}
+
+.menu-item-language-switcher .lang-switcher-toggle {
+    cursor: pointer;
+}
+
+.menu-item-language-switcher .lang-switcher-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.menu-item-language-switcher:hover .lang-switcher-dropdown,
+.menu-item-language-switcher .lang-switcher-toggle[aria-expanded="true"] + .lang-switcher-dropdown {
+    display: block;
+}
+
+.lang-switcher--header {
+    margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
+    .lang-switcher__toggle {
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .lang-switcher__list {
+        position: fixed;
+        top: auto;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        background: rgba(12, 24, 38, 0.98);
+        border-radius: 1rem;
+        min-width: 12rem;
+    }
+}

@@ -3,11 +3,101 @@ namespace CTA\Config;
 
 class GalleryConfig
 {
-    public static function getTabs(): array
+    private static array $translations = [
+        'fr' => [
+            'intro' => [
+                'label' => 'Voyage visuel',
+                'title' => 'L’univers en images',
+                'lead' => '[FR] Texte de présentation temporaire pour la galerie.'
+            ],
+            'tabs' => [
+                'deck' => [
+                    'label' => 'Le deck',
+                    'title' => '[FR] Titre de section temporaire',
+                    'description' => '[FR] Description temporaire du deck Sunlight.'
+                ],
+                'concept' => [
+                    'label' => 'Concept art',
+                    'title' => '[FR] Coulisses créatives',
+                    'description' => '[FR] Description temporaire pour le concept art.'
+                ],
+                'inspiration' => [
+                    'label' => 'Inspiration',
+                    'title' => '[FR] Sources mythiques',
+                    'description' => '[FR] Description temporaire des inspirations.'
+                ],
+                'symbols' => [
+                    'label' => 'Symboles',
+                    'title' => '[FR] Langage visuel',
+                    'description' => '[FR] Description temporaire des symboles.'
+                ],
+            ],
+        ],
+        'es' => [
+            'intro' => [
+                'label' => 'Recorrido visual',
+                'title' => 'El universo en imágenes',
+                'lead' => '[ES] Texto introductorio provisional para la galería.'
+            ],
+            'tabs' => [
+                'deck' => [
+                    'label' => 'La baraja',
+                    'title' => '[ES] Título temporal del mazo',
+                    'description' => '[ES] Descripción provisional del mazo Sunlight.'
+                ],
+                'concept' => [
+                    'label' => 'Arte conceptual',
+                    'title' => '[ES] Tras bambalinas',
+                    'description' => '[ES] Descripción provisional del arte conceptual.'
+                ],
+                'inspiration' => [
+                    'label' => 'Inspiración',
+                    'title' => '[ES] Fuentes místicas',
+                    'description' => '[ES] Descripción provisional de las inspiraciones.'
+                ],
+                'symbols' => [
+                    'label' => 'Símbolos',
+                    'title' => '[ES] Lenguaje visual',
+                    'description' => '[ES] Descripción provisional de los símbolos.'
+                ],
+            ],
+        ],
+        'he' => [
+            'intro' => [
+                'label' => 'מסע חזותי',
+                'title' => 'היקום בתמונות',
+                'lead' => '[HE] טקסט הקדמה זמני לגלריה.'
+            ],
+            'tabs' => [
+                'deck' => [
+                    'label' => 'החפיסה',
+                    'title' => '[HE] כותרת זמנית לחפיסה',
+                    'description' => '[HE] תיאור זמני לחפיסת Sunlight.'
+                ],
+                'concept' => [
+                    'label' => 'קונספט ארט',
+                    'title' => '[HE] מאחורי הקלעים',
+                    'description' => '[HE] תיאור זמני לאמנות הקונספט.'
+                ],
+                'inspiration' => [
+                    'label' => 'השראה',
+                    'title' => '[HE] מקורות השראה',
+                    'description' => '[HE] תיאור זמני של ההשראות.'
+                ],
+                'symbols' => [
+                    'label' => 'סמלים',
+                    'title' => '[HE] שפה חזותית',
+                    'description' => '[HE] תיאור זמני של הסמלים.'
+                ],
+            ],
+        ],
+    ];
+
+    public static function getTabs(?string $language = null): array
     {
         $base = self::uploadsBase();
 
-        return [
+        $tabs = [
             [
                 'id' => 'deck',
                 'icon' => '🃏',
@@ -45,15 +135,73 @@ class GalleryConfig
                 'items' => self::getSymbolItems($base),
             ],
         ];
+
+        $language = self::resolveLanguage($language);
+        $overrides = self::$translations[$language]['tabs'] ?? [];
+
+        foreach ($tabs as &$tab) {
+            $tabId = $tab['id'] ?? null;
+            if (!$tabId || empty($overrides[$tabId])) {
+                continue;
+            }
+
+            $override = $overrides[$tabId];
+            $itemOverrides = $override['items'] ?? [];
+            unset($override['items']);
+
+            $tab = array_merge($tab, $override);
+
+            if (!empty($itemOverrides) && !empty($tab['items'])) {
+                foreach ($tab['items'] as $index => $item) {
+                    if (isset($itemOverrides[$index])) {
+                        $tab['items'][$index] = array_merge($item, $itemOverrides[$index]);
+                    }
+                }
+            }
+        }
+        unset($tab);
+
+        return $tabs;
     }
 
-    public static function getIntro(): array
+    public static function getIntro(?string $language = null): array
     {
-        return [
+        $intro = [
             'label' => 'Visual Journey',
             'title' => 'The Vision in Images',
             'lead' => 'Every card, every color, every line is part of a larger symphony — the rebirth of Tarot. Explore concept art, elemental allies, and glimpses of the Sunlight world taking form.',
         ];
+
+        $language = self::resolveLanguage($language);
+        $override = self::$translations[$language]['intro'] ?? [];
+
+        return array_merge($intro, $override);
+    }
+
+    private static function resolveLanguage(?string $language): string
+    {
+        if ($language) {
+            return self::normalize($language);
+        }
+
+        if (class_exists('LanguageSwitcher\\Support\\Context')) {
+            return self::normalize(\LanguageSwitcher\Support\Context::currentCode());
+        }
+
+        $requested = isset($_GET['lang']) ? sanitize_key(wp_unslash($_GET['lang'])) : '';
+
+        return self::normalize($requested);
+    }
+
+    private static function normalize(?string $language): string
+    {
+        if (!$language) {
+            return 'en';
+        }
+
+        $language = strtolower($language);
+
+        return array_key_exists($language, self::$translations) ? $language : 'en';
     }
 
     private static function uploadsBase(): string

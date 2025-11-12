@@ -15,7 +15,11 @@ class SignupShortcode
     {
         SectionAssets::enqueue();
 
-        $content = SignupConfig::getContent();
+        $language = class_exists('LanguageSwitcher\\Support\\Context')
+            ? \LanguageSwitcher\Support\Context::currentCode()
+            : null;
+
+        $content = SignupConfig::getContent($language);
 
         ob_start();
         include CTA_PLUGIN_DIR . '/src/View/signup.php';

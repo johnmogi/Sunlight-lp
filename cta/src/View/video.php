@@ -19,8 +19,10 @@ $heroMeta = $hero['meta'] ?? '';
 $heroTitle = $hero['title'] ?? '';
 $heroDescription = $hero['description'] ?? '';
 $heroId = $hero['id'] ?? 'cta-hero-video';
+$isRtl = class_exists('LanguageSwitcher\\Support\\Context') && \LanguageSwitcher\Support\Context::isRtl();
+$direction = $isRtl ? 'rtl' : 'ltr';
 ?>
-<section class="cta-video" id="cta-video" dir="ltr"
+<section class="cta-video<?php echo $isRtl ? ' is-rtl' : ''; ?>" id="cta-video" dir="<?php echo esc_attr($direction); ?>"
     data-ajax-url="<?php echo esc_url($ajax['ajaxUrl']); ?>"
     data-ajax-nonce="<?php echo esc_attr($ajax['nonce']); ?>">
     <div class="cta-container">

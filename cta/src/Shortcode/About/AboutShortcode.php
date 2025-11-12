@@ -15,9 +15,14 @@ class AboutShortcode
     {
         SectionAssets::enqueue();
 
-        $intro = AboutConfig::getIntro();
-        $cards = AboutConfig::getCards();
-        $quote = AboutConfig::getQuote();
+        $language = class_exists('LanguageSwitcher\\Support\\Context')
+            ? \LanguageSwitcher\Support\Context::currentCode()
+            : null;
+
+        $intro = AboutConfig::getIntro($language);
+        $cards = AboutConfig::getCards($language);
+        $universe = AboutConfig::getUniverse($language);
+        $quote = AboutConfig::getQuote($language);
 
         ob_start();
         include CTA_PLUGIN_DIR . '/src/View/about.php';

@@ -29,7 +29,11 @@ class SliderController {
     }
 
     public function render() {
-        $slides = SlideConfig::getSlides();
+        $language = class_exists('LanguageSwitcher\\Support\\Context')
+            ? \LanguageSwitcher\Support\Context::currentCode()
+            : null;
+
+        $slides = SlideConfig::getSlides($language);
         ob_start();
         include CTA_PLUGIN_DIR . '/src/View/slider.php';
         return ob_get_clean();

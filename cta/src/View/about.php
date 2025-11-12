@@ -2,8 +2,10 @@
 /** @var array $intro */
 /** @var array $cards */
 /** @var array $quote */
+$isRtl = class_exists('LanguageSwitcher\\Support\\Context') && \LanguageSwitcher\Support\Context::isRtl();
+$direction = $isRtl ? 'rtl' : 'ltr';
 ?>
-<section class="cta-about" id="cta-about" dir="ltr">
+<section class="cta-about<?php echo $isRtl ? ' is-rtl' : ''; ?>" id="cta-about" dir="<?php echo esc_attr($direction); ?>">
     <div class="cta-container">
         <div class="cta-about__intro">
             <span class="cta-section-label"><?php echo esc_html($intro['label']); ?></span>
@@ -21,7 +23,6 @@
             <?php endforeach; ?>
         </div>
 
-        <?php $universe = \CTA\Config\AboutConfig::getUniverse(); ?>
         <div class="cta-about__universe">
             <h3 class="cta-about__universe-label"><?php echo esc_html($universe['label']); ?></h3>
             <p class="cta-about__universe-description"><?php echo esc_html($universe['description']); ?></p>

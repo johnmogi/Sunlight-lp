@@ -5,6 +5,11 @@
     position: relative;
 }
 
+.cta-slider.is-rtl {
+    direction: rtl;
+    text-align: right;
+}
+
 .cta-slides {
     position: relative;
     min-height: 300px;
@@ -108,6 +113,15 @@
 
 .cta-toggle.active {
     background: #0073aa;
+}
+
+.cta-slider.is-rtl .cta-submit-form .form-row {
+    flex-direction: row-reverse;
+}
+
+.cta-slider.is-rtl .cta-submit-form input[name="name"],
+.cta-slider.is-rtl .cta-submit-form input[name="email"] {
+    text-align: right;
 }
 
 /* Navigation */

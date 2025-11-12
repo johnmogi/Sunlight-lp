@@ -3,9 +3,8 @@ namespace CTA\Config;
 
 class VideoConfig
 {
-    public static function getContent(): array
-    {
-        return [
+    private static array $content = [
+        'en' => [
             'intro' => [
                 'label' => 'Experience the Light',
                 'title' => 'Stories in Motion',
@@ -87,6 +86,207 @@ class VideoConfig
                     ],
                 ],
             ],
-        ];
+        ],
+        'fr' => [
+            'intro' => [
+                'label' => 'Vivez la lumière',
+                'title' => 'Histoires en mouvement',
+                'lead' => 'Film, jeu et son racontent l’histoire de Sunlight. Découvrez l’univers à travers des bandes-annonces, des sessions live et des paysages sonores immersifs.',
+            ],
+            'hero' => [
+                'meta' => 'Film principal',
+                'title' => 'L’histoire commence ici',
+                'description' => 'Découvrez le premier aperçu de Sunlight Tarot — un voyage entre art, esprit et imagination. Ce court métrage présente la lumière des cartes, la musique qui les anime et la vision qui relie tout.',
+            ],
+            'playlist' => [
+                'heading' => 'Choisissez une autre expérience',
+                'description' => 'Sélectionnez une vidéo ou un parcours sonore pour remplacer le lecteur principal. Chaque entrée révèle une facette de l’univers Sunlight — coulisses, musique et avant-premières de gameplay.',
+                'items' => [
+                    [
+                        'meta' => 'Première YouTube',
+                        'title' => 'Le rêveur s’éveille — bande-annonce officielle',
+                        'description' => 'Un regard cinématographique sur l’arc de l’éveil et la renaissance du Tarot.',
+                    ],
+                    [
+                        'meta' => 'Aperçu de gameplay',
+                        'title' => 'Session prototype Scroll Maze',
+                        'description' => 'Explorez la conscience stratégique à travers les premières mécaniques et choix narratifs.',
+                    ],
+                    [
+                        'meta' => 'Musique live',
+                        'title' => 'Session studio : Fréquences de lumière',
+                        'description' => 'Une exploration guidée des motifs élémentaires du Tarot.',
+                    ],
+                ],
+            ],
+            'media' => [
+                'heading' => 'Albums & paysages sonores',
+                'description' => 'Plongez dans des playlists évolutives, des boucles méditatives et des compagnons audio narratifs.',
+                'items' => [
+                    [
+                        'meta' => 'Album musical',
+                        'title' => 'Suite ambiante pour l’éveil',
+                        'description' => 'Un mélange doux de synthés, de carillons et de drones sacrés enregistré pour la méditation longue.',
+                    ],
+                    [
+                        'meta' => 'Chapitre narré',
+                        'title' => 'Scroll Maze Chapitre Un — édition audio',
+                        'description' => 'Écoutez le premier chapitre du Scroll Maze dans un format narré exclusif.',
+                    ],
+                    [
+                        'meta' => 'Boucle de concentration',
+                        'title' => 'Boucle des quatre éléments',
+                        'description' => 'Une boucle répétitive conçue pour l’écriture, le codage et la contemplation.',
+                    ],
+                ],
+            ],
+        ],
+        'es' => [
+            'intro' => [
+                'label' => 'Vive la luz',
+                'title' => 'Historias en movimiento',
+                'lead' => 'Cine, jugabilidad y sonido se unen para contar la historia de Sunlight. Explora el universo mediante tráilers, sesiones en vivo y paisajes sonoros inmersivos.',
+            ],
+            'hero' => [
+                'meta' => 'Película destacada',
+                'title' => 'La historia comienza aquí',
+                'description' => 'Mira el primer vistazo de Sunlight Tarot — un viaje de arte, espíritu e imaginación. Este cortometraje presenta la luz detrás de las cartas, la música que las impulsa y la visión que lo conecta todo.',
+            ],
+            'playlist' => [
+                'heading' => 'Elige otra experiencia',
+                'description' => 'Selecciona un viaje de video o audio para cambiar el reproductor principal. Cada entrada muestra una faceta del universo Sunlight — detrás de cámaras, sesiones musicales y avances de juego.',
+                'items' => [
+                    [
+                        'meta' => 'Estreno en YouTube',
+                        'title' => 'El soñador despierta — tráiler oficial',
+                        'description' => 'Una mirada cinematográfica al arco del despertar y al Tarot renacido.',
+                    ],
+                    [
+                        'meta' => 'Avance de jugabilidad',
+                        'title' => 'Sesión prototipo de Scroll Maze',
+                        'description' => 'Explora la conciencia estratégica mediante mecánicas tempranas y decisiones narrativas.',
+                    ],
+                    [
+                        'meta' => 'Música en vivo',
+                        'title' => 'Sesión de estudio: Frecuencias de luz',
+                        'description' => 'Un recorrido guiado por los motivos elementales del Tarot.',
+                    ],
+                ],
+            ],
+            'media' => [
+                'heading' => 'Álbumes y paisajes sonoros',
+                'description' => 'Sumérgete en playlists en evolución, bucles meditativos y acompañantes narrativos de audio.',
+                'items' => [
+                    [
+                        'meta' => 'Álbum musical',
+                        'title' => 'Suite ambiente para el despertar',
+                        'description' => 'Una mezcla suave de sintetizadores, campanas y drones sagrados para meditación prolongada.',
+                    ],
+                    [
+                        'meta' => 'Capítulo narrado',
+                        'title' => 'Scroll Maze Capítulo Uno — edición en audio',
+                        'description' => 'Escucha el primer capítulo de Scroll Maze en un formato narrado exclusivo.',
+                    ],
+                    [
+                        'meta' => 'Bucle de enfoque',
+                        'title' => 'Bucle de los cuatro elementos',
+                        'description' => 'Un loop repetitivo diseñado para escribir, programar y contemplar en profundidad.',
+                    ],
+                ],
+            ],
+        ],
+        'he' => [
+            'intro' => [
+                'label' => 'חוו את האור',
+                'title' => 'סיפורים בתנועה',
+                'lead' => 'קולנוע, משחק וסOUND מתאחדים כדי לספר את סיפור Sunlight. חקרו טריילרים, סשנים חיים ונופי צליל סוחפים.',
+            ],
+            'hero' => [
+                'meta' => 'סרט מרכזי',
+                'title' => 'הסיפור מתחיל כאן',
+                'description' => 'צפו בהצצה הראשונה ל-Sunlight Tarot — מסע של אמנות, רוח ודמיון. הסרטון מציג את האור שמאחורי הקלפים, את המוזיקה שמניעה אותם ואת החזון שמחבר הכול.',
+            ],
+            'playlist' => [
+                'heading' => 'בחרו חוויה אחרת',
+                'description' => 'בחרו וידאו או מסע שמע כדי להחליף את הנגן הראשי. כל פריט מאיר היבט אחר של יקום Sunlight — מאחורי הקלעים, סשנים מוזיקליים ותצוגות משחק מוקדמות.',
+                'items' => [
+                    [
+                        'meta' => 'בכורת YouTube',
+                        'title' => 'התעוררות החולם — טריילר רשמי',
+                        'description' => 'מבט קולנועי על מסע ההתעוררות ועל הטארוט שנולד מחדש.',
+                    ],
+                    [
+                        'meta' => 'תצוגת משחק',
+                        'title' => 'סשן אב-טיפוס של Scroll Maze',
+                        'description' => 'גלו תודעה אסטרטגית דרך מכניקות מוקדמות והחלטות סיפוריות.',
+                    ],
+                    [
+                        'meta' => 'מוזיקה חיה',
+                        'title' => 'סשן אולפן: תדרי אור',
+                        'description' => 'סיור מודרך במוטיבים היסודיים של הטארוט.',
+                    ],
+                ],
+            ],
+            'media' => [
+                'heading' => 'אלבומים ונופי צליל',
+                'description' => 'העמיקו בפלייליסטים מתפתחים, בלופים מדיטטיביים ומלווים נרטיביים.',
+                'items' => [
+                    [
+                        'meta' => 'אלבום מוזיקה',
+                        'title' => 'סוויטה אמביינטית להתעוררות',
+                        'description' => 'תערובת רכה של סינתים, פעמונים וצילצולים קדושים להאזנה ממושכת.',
+                    ],
+                    [
+                        'meta' => 'פרק מוקלט',
+                        'title' => 'Scroll Maze פרק ראשון — גרסת שמע',
+                        'description' => 'האזינו לפרק הראשון של Scroll Maze בגרסה מוקלטת בלעדית.',
+                    ],
+                    [
+                        'meta' => 'לולאת מיקוד',
+                        'title' => 'לולאת ארבעת האלמנטים',
+                        'description' => 'לולאה חוזרת שנועדה לכתיבה, תכנות והתבוננות עמוקה.',
+                    ],
+                ],
+            ],
+        ],
+    ];
+
+    public static function getContent(?string $language = null): array
+    {
+        $language = self::resolveLanguage($language);
+
+        $base = self::$content['en'];
+
+        if ($language === 'en') {
+            return $base;
+        }
+
+        return array_replace_recursive($base, self::$content[$language] ?? []);
+    }
+
+    private static function resolveLanguage(?string $language): string
+    {
+        if ($language) {
+            return self::normalize($language);
+        }
+
+        if (class_exists('LanguageSwitcher\\Support\\Context')) {
+            return self::normalize(\LanguageSwitcher\Support\Context::currentCode());
+        }
+
+        $requested = isset($_GET['lang']) ? sanitize_key(wp_unslash($_GET['lang'])) : '';
+
+        return self::normalize($requested);
+    }
+
+    private static function normalize(?string $language): string
+    {
+        if (!$language) {
+            return 'en';
+        }
+
+        $language = strtolower($language);
+
+        return array_key_exists($language, self::$content) ? $language : 'en';
     }
 }

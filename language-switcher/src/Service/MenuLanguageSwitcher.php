@@ -1,7 +1,7 @@
 <?php
 namespace LanguageSwitcher\Service;
 
-use LanguageSwitcher\Config\Languages;
+use LanguageSwitcher\Service\SwitcherRenderer;
 
 class MenuLanguageSwitcher
 {
@@ -15,7 +15,7 @@ class MenuLanguageSwitcher
 
     public function appendSwitcher(string $items, $args): string
     {
-        if (!isset($args->theme_location) || !in_array($args->theme_location, $this->targetLocations, true)) {
+        if (!isset($args->theme_location) || !$this->shouldAppendToLocation($args->theme_location)) {
             return $items;
         }
 
@@ -26,11 +26,15 @@ class MenuLanguageSwitcher
 
     private function getSwitcherMarkup(): string
     {
-        $languages = Languages::all();
-        $currentLocale = function_exists('determine_locale') ? determine_locale() : get_locale();
+        return SwitcherRenderer::render('menu');
+    }
 
-        ob_start();
-        include LANG_SWITCHER_DIR . '/src/View/switcher.php';
-        return ob_get_clean();
+    private function shouldAppendToLocation(string $location): bool
+    {
+        if (in_array($location, $this->targetLocations, true)) {
+            return true;
+        }
+
+        return strpos($location, 'menu_') === 0;
     }
 }

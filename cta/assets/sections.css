@@ -4,6 +4,46 @@
     padding: 0 1.5rem;
 }
 
+/* RTL helpers */
+.cta-section-label.is-rtl,
+.cta-section-title.is-rtl,
+.cta-section-lead.is-rtl {
+    text-align: right;
+}
+
+.cta-video.is-rtl,
+.cta-gallery.is-rtl,
+.cta-about.is-rtl,
+.cta-signup.is-rtl {
+    direction: rtl;
+}
+
+.cta-video.is-rtl .cta-video__intro,
+.cta-video.is-rtl .cta-media__header {
+    text-align: right;
+}
+
+.cta-video.is-rtl .cta-video__playlist-button {
+    text-align: right;
+}
+
+.cta-video.is-rtl .cta-video__playlist-button {
+    grid-template-columns: 1fr 80px;
+}
+
+.cta-video.is-rtl .cta-video__playlist-button .cta-video__thumb {
+    order: 2;
+}
+
+.cta-video.is-rtl .cta-video__playlist-body {
+    order: 1;
+    text-align: right;
+}
+
+.cta-video.is-rtl .cta-video__player-details {
+    text-align: right;
+}
+
 /* Video */
 .cta-video {
     padding: 4rem 0;
@@ -163,6 +203,10 @@
     margin-bottom: 2rem;
 }
 
+.cta-video.is-rtl .cta-media__header {
+    text-align: right;
+}
+
 .cta-media__grid {
     display: grid;
     gap: 1.5rem;
@@ -256,6 +300,39 @@
     background: linear-gradient(180deg, #0b1320 0%, #111a2b 100%);
     color: #ffffff;
     direction: ltr;
+}
+
+.cta-signup.is-rtl {
+    direction: rtl;
+}
+
+.cta-signup.is-rtl .cta-section-label,
+.cta-signup.is-rtl .cta-section-title,
+.cta-signup.is-rtl .cta-section-lead,
+.cta-signup.is-rtl .cta-signup__privacy {
+    text-align: right;
+}
+
+.cta-signup.is-rtl .cta-signup__list li {
+    padding-left: 0;
+    padding-right: 1.75rem;
+}
+
+.cta-signup.is-rtl .cta-signup__list li::before {
+    left: auto;
+    right: 0;
+}
+
+.cta-signup.is-rtl .cta-signup__field {
+    text-align: right;
+}
+
+.cta-signup.is-rtl .cta-signup__field input {
+    text-align: right;
+}
+
+.cta-signup.is-rtl .cta-signup__submit {
+    flex-direction: row-reverse;
 }
 
 .cta-signup .cta-container {
@@ -775,6 +852,31 @@ body.cta-lightbox-open {
     direction: ltr;
 }
 
+.cta-about.is-rtl {
+    direction: rtl;
+}
+
+.cta-about.is-rtl .cta-about__intro,
+.cta-about.is-rtl .cta-about__universe,
+.cta-about.is-rtl .cta-about__quote {
+    text-align: right;
+}
+
+.cta-about.is-rtl .cta-about__card {
+    text-align: right;
+}
+
+.cta-about.is-rtl .cta-about__icon {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.cta-video.is-rtl .cta-section-label,
+.cta-gallery.is-rtl .cta-section-label,
+.cta-about.is-rtl .cta-section-label,
+.cta-signup.is-rtl .cta-section-label {
+    text-align: right;
+}
 .cta-about__intro {
     text-align: center;
     margin-bottom: 3rem;

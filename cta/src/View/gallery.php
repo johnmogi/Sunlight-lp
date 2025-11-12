@@ -9,8 +9,10 @@
 $firstTabId = $tabs[0]['id'] ?? null;
 $lightboxId = function_exists('wp_generate_uuid4') ? 'cta-gallery-lightbox-' . wp_generate_uuid4() : 'cta-gallery-lightbox-' . uniqid();
 $triggerAttribute = 'data-trigger="gallery"';
+$isRtl = class_exists('LanguageSwitcher\\Support\\Context') && \LanguageSwitcher\Support\Context::isRtl();
+$direction = $isRtl ? 'rtl' : 'ltr';
 ?>
-<section class="cta-gallery" id="cta-gallery" dir="ltr">
+<section class="cta-gallery<?php echo $isRtl ? ' is-rtl' : ''; ?>" id="cta-gallery" dir="<?php echo esc_attr($direction); ?>">
     <div class="cta-container">
         <?php if (!empty($intro)): ?>
             <div class="cta-gallery__intro">

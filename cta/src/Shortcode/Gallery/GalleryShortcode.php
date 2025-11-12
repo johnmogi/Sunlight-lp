@@ -15,8 +15,12 @@ class GalleryShortcode
     {
         SectionAssets::enqueue();
 
-        $intro = GalleryConfig::getIntro();
-        $tabs = GalleryConfig::getTabs();
+        $language = class_exists('LanguageSwitcher\\Support\\Context')
+            ? \LanguageSwitcher\Support\Context::currentCode()
+            : null;
+
+        $intro = GalleryConfig::getIntro($language);
+        $tabs = GalleryConfig::getTabs($language);
 
         ob_start();
         include CTA_PLUGIN_DIR . '/src/View/gallery.php';

@@ -19,7 +19,11 @@ class VideoShortcode
             'url' => '',
         ], $atts, 'cta_video');
 
-        $content = VideoConfig::getContent();
+        $language = class_exists('LanguageSwitcher\\Support\\Context')
+            ? \LanguageSwitcher\Support\Context::currentCode()
+            : null;
+
+        $content = VideoConfig::getContent($language);
         $ajax = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('cta_nonce'),

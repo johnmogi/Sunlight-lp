@@ -9,8 +9,10 @@ $title = $content['title'] ?? '';
 $lead = $content['lead'] ?? '';
 $bullet_points = $content['bullet_points'] ?? [];
 $privacy = $content['privacy'] ?? '';
+$isRtl = class_exists('LanguageSwitcher\\Support\\Context') && \LanguageSwitcher\Support\Context::isRtl();
+$direction = $isRtl ? 'rtl' : 'ltr';
 ?>
-<section class="cta-signup" id="cta-signup" dir="ltr">
+<section class="cta-signup<?php echo $isRtl ? ' is-rtl' : ''; ?>" id="cta-signup" dir="<?php echo esc_attr($direction); ?>">
     <div class="cta-container">
         <div class="cta-signup__content">
             <?php if (!empty($label)): ?>
