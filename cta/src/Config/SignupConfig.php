@@ -5,48 +5,32 @@ class SignupConfig
 {
     private static array $content = [
         'en' => [
-            'label' => 'Join the Circle',
-            'title' => 'Be Part of the Creation',
-            'lead' => 'Leave your details to receive art reveals, story chapters, and invitations to early play sessions. No noise — only light.',
-            'bullet_points' => [
-                'First look at new Tarot artwork and symbolism reveals',
-                'Invitations to closed Scroll Maze playtests and salons',
-                'Opportunities to contribute to music, story, and game design',
-            ],
-            'privacy' => 'We respect your time and your inbox. Expect only meaningful updates, never spam.'
+            'label' => '✨ Newsletter',
+            'title' => 'Join the Sunlight Tarot Journey',
+            'lead' => 'Be the first to explore our open-source tarot deck and follow its creation from concept to Kickstarter launch. Sign up with your email for exclusive updates, behind-the-scenes peeks, and early access offers. No spam—just meaningful insights into the deck and its magic.',
+            'button' => 'Subscribe & Stay Inspired',
+            'privacy' => 'We respect your inbox. Unsubscribe anytime.'
         ],
         'fr' => [
-            'label' => 'Rejoignez le cercle',
-            'title' => 'Participez à la création',
-            'lead' => 'Laissez-nous vos coordonnées pour recevoir des révélations artistiques, des chapitres d’histoire et des invitations aux sessions anticipées. Aucun bruit — uniquement de la lumière.',
-            'bullet_points' => [
-                'Aperçu exclusif des nouvelles œuvres et symboles du Tarot',
-                'Invitations aux playtests privés du Scroll Maze et aux salons',
-                'Occasions de contribuer à la musique, à l’histoire et au game design',
-            ],
-            'privacy' => 'Nous respectons votre temps et votre boîte de réception. Attendez-vous à des messages précieux, jamais du spam.'
+            'label' => '✨ Newsletter',
+            'title' => 'Rejoignez l\'aventure Sunlight Tarot',
+            'lead' => 'Soyez parmi les premiers à découvrir notre jeu de tarot open-source et suivez sa création du concept au lancement Kickstarter. Inscrivez-vous avec votre email pour des mises à jour exclusives, des aperçus en coulisses et des offres d\'accès anticipé. Pas de spam—seulement des informations significatives sur le jeu et sa magie.',
+            'button' => 'S\'abonner et rester inspiré',
+            'privacy' => 'Nous respectons votre boîte de réception. Désabonnez-vous à tout moment.'
         ],
         'es' => [
-            'label' => 'Únete al círculo',
-            'title' => 'Forma parte de la creación',
-            'lead' => 'Déjanos tus datos para recibir revelaciones artísticas, capítulos de la historia e invitaciones a sesiones tempranas. Sin ruido — solo luz.',
-            'bullet_points' => [
-                'Primer vistazo a las nuevas ilustraciones y símbolos del Tarot',
-                'Invitaciones a pruebas cerradas de Scroll Maze y encuentros privados',
-                'Oportunidades para contribuir a la música, la historia y el diseño del juego',
-            ],
-            'privacy' => 'Respetamos tu tiempo y tu bandeja de entrada. Solo recibirás actualizaciones significativas, nunca spam.'
+            'label' => '✨ Newsletter',
+            'title' => 'Únete al viaje de Sunlight Tarot',
+            'lead' => 'Sé de los primeros en explorar nuestro mazo de tarot de código abierto y sigue su creación desde el concepto hasta el lanzamiento en Kickstarter. Regístrate con tu email para actualizaciones exclusivas, vistazos detrás de escena y ofertas de acceso anticipado. Sin spam—solo información significativa sobre el mazo y su magia.',
+            'button' => 'Suscríbete y mantente inspirado',
+            'privacy' => 'Respetamos tu bandeja de entrada. Cancela en cualquier momento.'
         ],
         'he' => [
-            'label' => 'הצטרפו למעגל',
-            'title' => 'היו חלק מהיצירה',
-            'lead' => 'השאירו פרטים כדי לקבל חשיפות אמנות, פרקי סיפור והזמנות למפגשי משחק מוקדמים. ללא רעש — רק אור.',
-            'bullet_points' => [
-                'הצצה ראשונה לאמנות החדשה ולסמלי הטארוט',
-                'הזמנות למשחקי ניסיון סגורים של Scroll Maze ולמפגשי סלון',
-                'הזדמנויות לתרום למוזיקה, לסיפור ולעיצוב המשחק',
-            ],
-            'privacy' => 'אנחנו מכבדים את זמנכם ואת תיבת הדואר שלכם. רק עדכונים משמעותיים, לעולם לא ספאם.'
+            'label' => '✨ ניוזלטר',
+            'title' => 'הצטרפו למסע Sunlight Tarot',
+            'lead' => 'היו הראשונים לחקור את חפיסת הטארוט בקוד פתוח שלנו ולעקוב אחר יצירתה מהרעיון ועד להשקה ב-Kickstarter. הירשמו עם האימייל שלכם לעדכונים בלעדיים, הצצות מאחורי הקלעים והצעות גישה מוקדמת. ללא ספאם—רק תובנות משמעותיות על החפיסה והקסם שלה.',
+            'button' => 'הירשמו והישארו בהשראה',
+            'privacy' => 'אנחנו מכבדים את תיבת הדואר שלכם. בטלו את המנוי בכל עת.'
         ],
     ];
 

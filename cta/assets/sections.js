@@ -2,7 +2,7 @@
     'use strict';
 
     var tabSelectors = '.cta-gallery__tabs button';
-    var triggerSelector = '.cta-gallery__trigger[data-trigger="gallery"]';
+    var triggerSelector = '[data-trigger="gallery"]';
     var lightboxSelector = '.cta-gallery__lightbox';
     var playlistSelector = '.cta-video__playlist-button[data-video-trigger]';
     var playerSelector = '[data-video-player]';
@@ -35,6 +35,10 @@
 
         var $button = $(event.currentTarget);
         var group = $button.data('group');
+        if (!group) {
+            return;
+        }
+
         var $lightbox = $('#' + group);
 
         if (!$lightbox.length) {
@@ -218,7 +222,7 @@
         var data = {
             action: 'cta_submit',
             nonce: ctaSectionsData.nonce,
-            name: $form.find('input[name="name"]').val(),
+            name: '',
             email: $form.find('input[name="email"]').val(),
             website: $form.find('input[name="website"]').val()
         };
