@@ -76,14 +76,14 @@ $direction = $isRtl ? 'rtl' : 'ltr';
                                 $meta = $feedback['meta'] ?? [];
                                 $metaAttr = !empty($meta) ? ' data-feedback-meta="' . esc_attr(wp_json_encode($meta)) . '"' : '';
                                 ?>
-                                <article class="cta-gallery-card<?php echo $isFeatured ? ' is-featured' : ''; ?>" data-feedback-id="<?php echo esc_attr($feedbackId); ?>"<?php echo $metaAttr; ?>>
+                                <article class="cta-gallery-card" data-feedback-id="<?php echo esc_attr($feedbackId); ?>"<?php echo $metaAttr; ?>>
                                     <div class="cta-gallery-card__media">
                                         <?php if (!empty($image)): ?>
                                             <button type="button" class="cta-gallery-card__image" <?php echo $triggerAttribute; ?> data-group="<?php echo esc_attr($lightboxId); ?>" data-index="<?php echo esc_attr($tabId . '-' . $itemIndex); ?>" data-image="<?php echo esc_url($image); ?>" data-title="<?php echo esc_attr($title); ?>" data-headline="<?php echo esc_attr($headline); ?>" data-caption="<?php echo esc_attr($description); ?>" data-alt="<?php echo esc_attr($alt); ?>">
                                                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($alt); ?>">
                                                 <span class="cta-gallery-card__image-overlay">
                                                     <span class="cta-gallery-card__image-icon" aria-hidden="true">🔍</span>
-                                                    <span class="cta-gallery-card__image-label"><?php echo esc_html($feedback_strings['modal_title'] ?? 'Tell us what you think'); ?></span>
+                                                    <span class="cta-gallery-card__image-label"><?php echo esc_html($feedback_strings['view_image_label'] ?? __('View image', 'cta')); ?></span>
                                                 </span>
                                             </button>
                                         <?php else: ?>
@@ -93,32 +93,22 @@ $direction = $isRtl ? 'rtl' : 'ltr';
                                         <?php endif; ?>
                                     </div>
                                     <div class="cta-gallery-card__body">
-                                        <?php if (!empty($subtitle) || !empty($icon)): ?>
-                                            <div class="cta-gallery-card__eyebrow">
-                                                <?php if (!empty($icon)): ?>
-                                                    <span class="cta-gallery-card__eyebrow-icon" aria-hidden="true"><?php echo esc_html($icon); ?></span>
-                                                <?php endif; ?>
-                                                <?php if (!empty($subtitle)): ?>
-                                                    <span class="cta-gallery-card__eyebrow-text"><?php echo esc_html($subtitle); ?></span>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endif; ?>
-
                                         <?php if (!empty($title)): ?>
                                             <h4 class="cta-gallery-card__title"><?php echo esc_html($title); ?></h4>
                                         <?php endif; ?>
 
-                                        <?php if (!empty($headline)): ?>
-                                            <p class="cta-gallery-card__headline"><?php echo esc_html($headline); ?></p>
-                                        <?php endif; ?>
-
                                         <?php if (!empty($description)): ?>
                                             <p class="cta-gallery-card__description"><?php echo esc_html($description); ?></p>
+                                        <?php elseif (!empty($headline)): ?>
+                                            <p class="cta-gallery-card__description"><?php echo esc_html($headline); ?></p>
                                         <?php endif; ?>
 
-                                        <div class="cta-gallery-card__feedback-preview" data-feedback-preview role="status" aria-live="polite"></div>
+                                        <div class="cta-gallery-card__metrics is-empty" data-feedback-preview role="status" aria-live="polite"></div>
                                     </div>
                                     <footer class="cta-gallery-card__footer">
+                                        <button type="button" class="cta-gallery-card__view-button" <?php echo $triggerAttribute; ?> data-group="<?php echo esc_attr($lightboxId); ?>" data-index="<?php echo esc_attr($tabId . '-' . $itemIndex); ?>" data-image="<?php echo esc_url($image); ?>" data-title="<?php echo esc_attr($title); ?>" data-headline="<?php echo esc_attr($headline); ?>" data-caption="<?php echo esc_attr($description); ?>" data-alt="<?php echo esc_attr($alt); ?>">
+                                            <?php echo esc_html($feedback_strings['view_image_label'] ?? __('View image', 'cta')); ?>
+                                        </button>
                                         <button type="button" class="cta-gallery-card__feedback-button" data-feedback-open data-feedback-target="<?php echo esc_attr($feedbackId); ?>">
                                             <?php echo esc_html($feedback_strings['button_label'] ?? 'Share your thoughts'); ?>
                                         </button>
@@ -152,6 +142,10 @@ $direction = $isRtl ? 'rtl' : 'ltr';
         <div class="cta-gallery__feedback-backdrop" data-feedback-close></div>
         <div class="cta-gallery__feedback-dialog">
             <button type="button" class="cta-gallery__feedback-close" aria-label="<?php echo esc_attr__('Close feedback', 'cta'); ?>" data-feedback-close>&times;</button>
+            <header class="cta-gallery__feedback-header">
+                <h3><?php echo esc_html($feedback_strings['modal_title'] ?? __('Share your thoughts', 'cta')); ?></h3>
+                <p class="cta-gallery__feedback-subtitle" data-feedback-subtitle></p>
+            </header>
             <div class="cta-gallery__feedback-media" data-feedback-media>
                 <img src="" alt="" data-feedback-image>
                 <div class="cta-gallery__feedback-meta">

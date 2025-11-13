@@ -19,6 +19,7 @@
         imageField: '[data-feedback-image]',
         titleField: '[data-feedback-title]',
         captionField: '[data-feedback-caption]',
+        subtitleField: '[data-feedback-subtitle]',
         preview: '[data-feedback-preview]'
     };
 
@@ -159,6 +160,7 @@
         $form.find('input[name="image_id"]').val(id || '');
 
         populateMeta(datasetEntry.meta || {});
+        updateModalSubtitle(datasetEntry.meta || {});
 
         state.modal.addClass('is-open').attr('aria-hidden', 'false');
         $('body').addClass('cta-feedback-open');
@@ -216,6 +218,22 @@
 
         $title.text(meta.title || meta.headline || '');
         $caption.text(meta.description || meta.subtitle || meta.headline || '');
+    }
+
+    function updateModalSubtitle(meta) {
+        var $subtitle = state.modal.find(selectors.subtitleField);
+        if (!$subtitle.length) {
+            return;
+        }
+
+        var template = state.strings.modal_subtitle || '';
+        var title = meta.title || meta.headline || '';
+
+        if (template && title) {
+            $subtitle.text(template.replace('%s', title));
+        } else {
+            $subtitle.text('');
+        }
     }
 
     function updateDataset(id, payload) {
@@ -324,16 +342,18 @@
         var chips = [];
 
         if (aggregates.avg_rating) {
-            var $ratingChip = $('<span>').addClass('cta-gallery-card__feedback-chip cta-gallery-card__feedback-chip--rating');
-            $('<span>').attr('aria-hidden', 'true').text('⭐').appendTo($ratingChip);
-            $('<span>').text(aggregates.avg_rating + ' ' + (state.strings.average_label || 'Average rating')).appendTo($ratingChip);
+            var $ratingChip = $('<span>').addClass('cta-gallery-card__metric');
+            $('<span>').addClass('cta-gallery-card__metric-icon').text('⭐').attr('aria-hidden', 'true').appendTo($ratingChip);
+            $('<span>').addClass('cta-gallery-card__metric-label').text((state.strings.average_label || 'Average rating') + ':').appendTo($ratingChip);
+            $('<strong>').text(aggregates.avg_rating).appendTo($ratingChip);
             chips.push($ratingChip);
         }
 
         var votesLabel = state.strings.total_votes_label || 'Votes';
-        var $votesChip = $('<span>').addClass('cta-gallery-card__feedback-chip');
-        $('<span>').attr('aria-hidden', 'true').text('🗳️').appendTo($votesChip);
-        $('<span>').text(total + ' ' + votesLabel).appendTo($votesChip);
+        var $votesChip = $('<span>').addClass('cta-gallery-card__metric');
+        $('<span>').addClass('cta-gallery-card__metric-icon').text('🗳️').attr('aria-hidden', 'true').appendTo($votesChip);
+        $('<span>').addClass('cta-gallery-card__metric-label').text(votesLabel + ':').appendTo($votesChip);
+        $('<strong>').text(total).appendTo($votesChip);
         chips.push($votesChip);
 
         var reactionStrings = state.strings.reactions || {};
@@ -355,9 +375,10 @@
             var icon = reactionConfig.icon || map.fallbackIcon;
             var label = reactionConfig.label || reaction.charAt(0).toUpperCase() + reaction.slice(1);
 
-            var $chip = $('<span>').addClass('cta-gallery-card__feedback-chip');
-            $('<span>').attr('aria-hidden', 'true').text(icon).appendTo($chip);
-            $('<span>').text(count + ' ' + label).appendTo($chip);
+            var $chip = $('<span>').addClass('cta-gallery-card__reaction');
+            $('<span>').addClass('cta-gallery-card__reaction-icon').attr('aria-hidden', 'true').text(icon).appendTo($chip);
+            $('<span>').addClass('cta-gallery-card__reaction-label').text(label).appendTo($chip);
+            $('<strong>').text(count).appendTo($chip);
             chips.push($chip);
         });
 
