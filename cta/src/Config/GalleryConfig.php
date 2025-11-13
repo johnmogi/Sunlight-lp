@@ -4,11 +4,34 @@ namespace CTA\Config;
 class GalleryConfig
 {
     private static array $translations = [
+        'en' => [
+            'feedback' => [],
+        ],
         'fr' => [
             'intro' => [
                 'label' => 'Voyage visuel',
                 'title' => 'L’univers en images',
                 'lead' => '[FR] Texte de présentation temporaire pour la galerie.'
+            ],
+            'feedback' => [
+                'button_label' => 'Partager votre avis',
+                'modal_title' => 'Donnez votre ressenti',
+                'rating_label' => 'Notez cette image',
+                'reaction_label' => 'Quelle émotion vous inspire-t-elle ?',
+                'comment_label' => 'Laissez un commentaire (optionnel)',
+                'name_label' => 'Nom (optionnel)',
+                'email_label' => 'Email (optionnel)',
+                'submit_label' => 'Envoyer',
+                'success_message' => 'Merci pour votre contribution !',
+                'error_message' => 'Impossible d’enregistrer votre avis. Réessayez.',
+                'throttle_message' => 'Vous avez déjà envoyé un avis récemment. Réessayez plus tard.',
+                'reaction_required' => 'Choisissez une réaction.',
+                'rating_required' => 'Sélectionnez une note.',
+                'reactions' => [
+                    'like' => ['label' => 'J’aime', 'icon' => '👍'],
+                    'love' => ['label' => 'Coup de cœur', 'icon' => '❤️'],
+                    'dislike' => ['label' => 'Je n’aime pas', 'icon' => '👎'],
+                ],
             ],
             'tabs' => [
                 'deck' => [
@@ -39,6 +62,26 @@ class GalleryConfig
                 'title' => 'El universo en imágenes',
                 'lead' => '[ES] Texto introductorio provisional para la galería.'
             ],
+            'feedback' => [
+                'button_label' => 'Comparte tu opinión',
+                'modal_title' => 'Cuéntanos qué sientes',
+                'rating_label' => 'Califica esta imagen',
+                'reaction_label' => '¿Qué emoción te genera?',
+                'comment_label' => 'Deja un comentario (opcional)',
+                'name_label' => 'Nombre (opcional)',
+                'email_label' => 'Correo (opcional)',
+                'submit_label' => 'Enviar',
+                'success_message' => '¡Gracias por tu aporte!',
+                'error_message' => 'No pudimos guardar tu opinión. Intenta de nuevo.',
+                'throttle_message' => 'Ya enviaste una opinión recientemente. Intenta más tarde.',
+                'reaction_required' => 'Elige una reacción.',
+                'rating_required' => 'Selecciona una calificación.',
+                'reactions' => [
+                    'like' => ['label' => 'Me gusta', 'icon' => '👍'],
+                    'love' => ['label' => 'Me encanta', 'icon' => '❤️'],
+                    'dislike' => ['label' => 'No me gusta', 'icon' => '👎'],
+                ],
+            ],
             'tabs' => [
                 'deck' => [
                     'label' => 'La baraja',
@@ -68,6 +111,26 @@ class GalleryConfig
                 'title' => 'היקום בתמונות',
                 'lead' => '[HE] טקסט הקדמה זמני לגלריה.'
             ],
+            'feedback' => [
+                'button_label' => 'שתפו את דעתכם',
+                'modal_title' => 'איך זה מרגיש לכם?',
+                'rating_label' => 'דרגו את התמונה',
+                'reaction_label' => 'איזה רגש היא מעוררת?',
+                'comment_label' => 'הוסיפו תגובה (לא חובה)',
+                'name_label' => 'שם (לא חובה)',
+                'email_label' => 'אימייל (לא חובה)',
+                'submit_label' => 'שלחו משוב',
+                'success_message' => 'תודה על המשוב!',
+                'error_message' => 'לא הצלחנו לשמור את המשוב. נסו שוב.',
+                'throttle_message' => 'כבר שלחתם משוב לאחרונה. נסו שוב מאוחר יותר.',
+                'reaction_required' => 'בחרו תגובה.',
+                'rating_required' => 'בחרו דירוג.',
+                'reactions' => [
+                    'like' => ['label' => 'אהבתי', 'icon' => '👍'],
+                    'love' => ['label' => 'מת על זה', 'icon' => '❤️'],
+                    'dislike' => ['label' => 'פחות', 'icon' => '👎'],
+                ],
+            ],
             'tabs' => [
                 'deck' => [
                     'label' => 'החפיסה',
@@ -92,6 +155,48 @@ class GalleryConfig
             ],
         ],
     ];
+
+    public static function getFeedbackStrings(?string $language = null): array
+    {
+        $language = self::resolveLanguage($language);
+        $defaults = self::defaultFeedbackStrings();
+        $override = self::$translations[$language]['feedback'] ?? [];
+
+        return array_replace_recursive($defaults, $override);
+    }
+
+    private static function defaultFeedbackStrings(): array
+    {
+        return [
+            'button_label' => __('Share your thoughts', 'cta'),
+            'modal_title' => __('Tell us what you think', 'cta'),
+            'rating_label' => __('Rate this image', 'cta'),
+            'reaction_label' => __('How does it make you feel?', 'cta'),
+            'comment_label' => __('Leave a comment (optional)', 'cta'),
+            'name_label' => __('Name (optional)', 'cta'),
+            'email_label' => __('Email (optional)', 'cta'),
+            'submit_label' => __('Send feedback', 'cta'),
+            'success_message' => __('Thank you for your feedback!', 'cta'),
+            'error_message' => __('Unable to save feedback. Please try again.', 'cta'),
+            'throttle_message' => __('You recently submitted feedback for this image. Please try again later.', 'cta'),
+            'reaction_required' => __('Please choose a reaction.', 'cta'),
+            'rating_required' => __('Please choose a rating.', 'cta'),
+            'average_label' => __('Average rating', 'cta'),
+            'total_votes_label' => __('Votes', 'cta'),
+            'reactions_label' => __('Reactions', 'cta'),
+            'no_ratings_label' => __('No ratings yet', 'cta'),
+            'rating_scale_label' => __('Select a rating', 'cta'),
+            'recent_comments_label' => __('Recent comments', 'cta'),
+            'no_comments_label' => __('No comments yet — be the first!', 'cta'),
+            'anonymous_label' => __('Anonymous', 'cta'),
+            'submit_loading_label' => __('Sending…', 'cta'),
+            'reactions' => [
+                'like' => ['label' => __('Like', 'cta'), 'icon' => '👍'],
+                'love' => ['label' => __('Love', 'cta'), 'icon' => '❤️'],
+                'dislike' => ['label' => __('Dislike', 'cta'), 'icon' => '👎'],
+            ],
+        ];
+    }
 
     public static function getTabs(?string $language = null): array
     {

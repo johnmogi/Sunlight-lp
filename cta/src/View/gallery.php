@@ -69,50 +69,60 @@ $direction = $isRtl ? 'rtl' : 'ltr';
                                 $image = $item['image'] ?? '';
                                 $headline = $item['headline'] ?? '';
                                 $description = $item['description'] ?? '';
-                                $meta = $item['meta'] ?? [];
                                 $isFeatured = !empty($item['featured']);
-                                $caption = $headline ?: $description;
                                 $alt = $title ?: $subtitle;
+                                $feedback = $item['feedback'] ?? [];
+                                $feedbackId = $feedback['id'] ?? ($tabId . '-' . $itemIndex);
+                                $meta = $feedback['meta'] ?? [];
+                                $metaAttr = !empty($meta) ? ' data-feedback-meta="' . esc_attr(wp_json_encode($meta)) . '"' : '';
                                 ?>
-                                <article class="cta-gallery__item <?php echo $isFeatured ? 'cta-gallery__item--featured' : ''; ?>">
-                                    <div class="cta-gallery__image">
+                                <article class="cta-gallery-card<?php echo $isFeatured ? ' is-featured' : ''; ?>" data-feedback-id="<?php echo esc_attr($feedbackId); ?>"<?php echo $metaAttr; ?>>
+                                    <div class="cta-gallery-card__media">
                                         <?php if (!empty($image)): ?>
-                                            <button type="button" class="cta-gallery__trigger" <?php echo $triggerAttribute; ?> data-group="<?php echo esc_attr($lightboxId); ?>" data-index="<?php echo esc_attr($tabId . '-' . $itemIndex); ?>" data-image="<?php echo esc_url($image); ?>" data-title="<?php echo esc_attr($title); ?>" data-headline="<?php echo esc_attr($headline); ?>" data-caption="<?php echo esc_attr($description); ?>" data-alt="<?php echo esc_attr($alt); ?>">
+                                            <button type="button" class="cta-gallery-card__image" <?php echo $triggerAttribute; ?> data-group="<?php echo esc_attr($lightboxId); ?>" data-index="<?php echo esc_attr($tabId . '-' . $itemIndex); ?>" data-image="<?php echo esc_url($image); ?>" data-title="<?php echo esc_attr($title); ?>" data-headline="<?php echo esc_attr($headline); ?>" data-caption="<?php echo esc_attr($description); ?>" data-alt="<?php echo esc_attr($alt); ?>">
                                                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($alt); ?>">
+                                                <span class="cta-gallery-card__image-overlay">
+                                                    <span class="cta-gallery-card__image-icon" aria-hidden="true">🔍</span>
+                                                    <span class="cta-gallery-card__image-label"><?php echo esc_html($feedback_strings['modal_title'] ?? 'Tell us what you think'); ?></span>
+                                                </span>
                                             </button>
                                         <?php else: ?>
-                                            <div class="cta-gallery__placeholder">
-                                                <span class="cta-gallery__icon"><?php echo esc_html($icon); ?></span>
+                                            <div class="cta-gallery-card__placeholder">
+                                                <span class="cta-gallery-card__placeholder-icon"><?php echo esc_html($icon); ?></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <div class="cta-gallery__body">
-                                        <?php if ($isFeatured && !empty($meta)): ?>
-                                            <div class="cta-gallery__meta">
-                                                <span><?php echo esc_html($meta[0] ?? ''); ?></span>
-                                                <span><?php echo esc_html($meta[1] ?? ''); ?></span>
-                                            </div>
-                                        <?php elseif (!empty($icon) || !empty($subtitle)): ?>
-                                            <div class="cta-gallery__meta">
-                                                <span class="cta-gallery__icon">&nbsp;<?php echo esc_html($icon); ?></span>
-                                                <span><?php echo esc_html($subtitle); ?></span>
+                                    <div class="cta-gallery-card__body">
+                                        <?php if (!empty($subtitle) || !empty($icon)): ?>
+                                            <div class="cta-gallery-card__eyebrow">
+                                                <?php if (!empty($icon)): ?>
+                                                    <span class="cta-gallery-card__eyebrow-icon" aria-hidden="true"><?php echo esc_html($icon); ?></span>
+                                                <?php endif; ?>
+                                                <?php if (!empty($subtitle)): ?>
+                                                    <span class="cta-gallery-card__eyebrow-text"><?php echo esc_html($subtitle); ?></span>
+                                                <?php endif; ?>
                                             </div>
                                         <?php endif; ?>
 
                                         <?php if (!empty($title)): ?>
-                                            <h4 class="cta-gallery__title"><?php echo esc_html($title); ?></h4>
+                                            <h4 class="cta-gallery-card__title"><?php echo esc_html($title); ?></h4>
                                         <?php endif; ?>
 
                                         <?php if (!empty($headline)): ?>
-                                            <p class="cta-gallery__headline"><?php echo esc_html($headline); ?></p>
+                                            <p class="cta-gallery-card__headline"><?php echo esc_html($headline); ?></p>
                                         <?php endif; ?>
 
                                         <?php if (!empty($description)): ?>
-                                            <p class="cta-gallery__subtitle"><?php echo esc_html($description); ?></p>
-                                        <?php elseif (!empty($subtitle) && empty($headline)): ?>
-                                            <p class="cta-gallery__subtitle"><?php echo esc_html($subtitle); ?></p>
+                                            <p class="cta-gallery-card__description"><?php echo esc_html($description); ?></p>
                                         <?php endif; ?>
+
+                                        <div class="cta-gallery-card__feedback-preview" data-feedback-preview role="status" aria-live="polite"></div>
                                     </div>
+                                    <footer class="cta-gallery-card__footer">
+                                        <button type="button" class="cta-gallery-card__feedback-button" data-feedback-open data-feedback-target="<?php echo esc_attr($feedbackId); ?>">
+                                            <?php echo esc_html($feedback_strings['button_label'] ?? 'Share your thoughts'); ?>
+                                        </button>
+                                    </footer>
                                 </article>
                             <?php endforeach; ?>
                         </div>
@@ -135,6 +145,71 @@ $direction = $isRtl ? 'rtl' : 'ltr';
                     <p class="cta-gallery__lightbox-text"></p>
                 </figcaption>
             </figure>
+        </div>
+    </div>
+
+    <div class="cta-gallery__feedback-modal" data-feedback-modal aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="cta-gallery__feedback-backdrop" data-feedback-close></div>
+        <div class="cta-gallery__feedback-dialog">
+            <button type="button" class="cta-gallery__feedback-close" aria-label="<?php echo esc_attr__('Close feedback', 'cta'); ?>" data-feedback-close>&times;</button>
+            <div class="cta-gallery__feedback-media" data-feedback-media>
+                <img src="" alt="" data-feedback-image>
+                <div class="cta-gallery__feedback-meta">
+                    <h4 data-feedback-title></h4>
+                    <p data-feedback-caption></p>
+                </div>
+            </div>
+            <form class="cta-gallery__feedback-form" data-feedback-form novalidate>
+                <input type="hidden" name="image_id" value="">
+                <input type="hidden" name="rating" value="" data-feedback-rating-input>
+                <input type="text" name="cta_feedback_url" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                <div class="cta-gallery__feedback-field">
+                    <label for="cta-feedback-name"><?php echo esc_html($feedback_strings['name_label'] ?? 'Name (optional)'); ?></label>
+                    <input type="text" id="cta-feedback-name" name="name" maxlength="150" data-feedback-name>
+                </div>
+
+                <div class="cta-gallery__feedback-field">
+                    <label for="cta-feedback-email"><?php echo esc_html($feedback_strings['email_label'] ?? 'Email (optional)'); ?></label>
+                    <input type="email" id="cta-feedback-email" name="email" maxlength="150" data-feedback-email>
+                </div>
+
+                <fieldset class="cta-gallery__feedback-reactions">
+                    <legend><?php echo esc_html($feedback_strings['reaction_label'] ?? 'How does it make you feel?'); ?></legend>
+                    <div class="cta-gallery__feedback-reaction-list" data-feedback-reactions>
+                        <?php
+                        $reactionValues = [
+                            'love' => 10,
+                            'like' => 7,
+                            'dislike' => 3,
+                        ];
+                        foreach (($feedback_strings['reactions'] ?? []) as $reactionKey => $reactionData):
+                            $ratingValue = $reactionValues[$reactionKey] ?? 5;
+                            $label = $reactionData['label'] ?? ucfirst($reactionKey);
+                            $icon = $reactionData['icon'] ?? '';
+                            $inputId = 'cta-feedback-reaction-' . esc_attr($reactionKey);
+                        ?>
+                            <label class="cta-gallery__feedback-reaction" for="<?php echo esc_attr($inputId); ?>">
+                                <input type="radio" name="reaction" id="<?php echo esc_attr($inputId); ?>" value="<?php echo esc_attr($reactionKey); ?>" data-rating="<?php echo esc_attr($ratingValue); ?>">
+                                <span class="cta-gallery__feedback-reaction-icon"><?php echo esc_html($icon); ?></span>
+                                <span class="cta-gallery__feedback-reaction-label"><?php echo esc_html($label); ?></span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </fieldset>
+
+                <div class="cta-gallery__feedback-field">
+                    <label for="cta-feedback-comment"><?php echo esc_html($feedback_strings['comment_label'] ?? 'Leave a comment (optional)'); ?></label>
+                    <textarea id="cta-feedback-comment" name="comment" maxlength="1000" rows="4" data-feedback-comment></textarea>
+                </div>
+
+                <div class="cta-gallery__feedback-actions">
+                    <span class="cta-gallery__feedback-response" data-feedback-response role="status" aria-live="polite"></span>
+                    <button type="submit" class="cta-gallery__feedback-submit" data-feedback-submit>
+                        <?php echo esc_html($feedback_strings['submit_label'] ?? 'Send feedback'); ?>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </section>

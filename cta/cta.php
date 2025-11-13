@@ -33,6 +33,18 @@ spl_autoload_register(function ($class) {
 
 // Initialize plugin
 add_action('plugins_loaded', function() {
+    if (class_exists('CTA\Repository\GalleryFeedbackRepository')) {
+        \CTA\Repository\GalleryFeedbackRepository::ensureTable();
+    }
+
+    if (class_exists('CTA\Service\GalleryCommentService')) {
+        \CTA\Service\GalleryCommentService::boot();
+    }
+
+    if (class_exists('CTA\Controller\GalleryFeedbackController')) {
+        \CTA\Controller\GalleryFeedbackController::boot();
+    }
+
     if (class_exists('CTA\Shortcode\Registry')) {
         \CTA\Shortcode\Registry::register();
     }
